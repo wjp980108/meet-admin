@@ -1,0 +1,9 @@
+.idea
+.vscode
+node_modules
+dist
+
+pnpm-lock.yaml
+
+src/typings/auto-imports.d.ts
+src/typings/components.d.ts
