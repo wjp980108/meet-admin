@@ -72,5 +72,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./dist/
-          target: C:/website/blog
+          target: C:/website/admin
           strip_components: 2
