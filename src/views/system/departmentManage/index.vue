@@ -135,7 +135,7 @@ onMounted(getTableList);
   <app-flex class="table-box">
     <app-card>
       <app-form :cols="{ xs: 1, sm: 3, md: 3, lg: 3, xl: 3 }" :search="getTableList" :reset="reset">
-        <app-form-item label="关键字" index="0">
+        <app-form-item label="关键字">
           <el-input v-model="params.keyWords" placeholder="请输入部门名称" clearable />
         </app-form-item>
         <app-form-item label="状态" index="2">

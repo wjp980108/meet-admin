@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ResponsiveValue } from '@/components/AppGrid/interface';
+import type { Props as AppGridProps } from '@/components/AppGrid/index.vue';
 
 defineOptions({ name: 'AppForm' });
 
@@ -11,12 +11,8 @@ withDefaults(defineProps<Props>(), {
   colGap: 15,
 });
 
-interface Props {
+interface Props extends AppGridProps {
   labelWidth?: string | number
-  cols: ResponsiveValue
-  collapsedRows?: number
-  rowGap?: number | ResponsiveValue
-  colGap?: number | ResponsiveValue
   search: () => void
   reset: () => void
 }

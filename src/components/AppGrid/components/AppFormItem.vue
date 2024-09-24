@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { FormItemProps } from 'element-plus';
 import type { ResponsiveValue } from '../interface';
-import { computed, inject, onUnmounted, ref, toRefs, watchEffect } from 'vue';
 import { GridContextInjectionKey, GridDataCollectorInjectionKey } from '../context';
 import { useIndex } from '../hook/use-index';
 import { useResponsiveState } from '../hook/use-responsive-state';
@@ -18,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   suffix: false,
 });
 
-interface Props extends FormItemProps {
+interface Props extends Partial<FormItemProps> {
   // 栅格左侧的间隔格数
   offset?: number | ResponsiveValue
   // 栅格占据的列数，为 0 的时候会隐藏

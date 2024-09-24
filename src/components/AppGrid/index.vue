@@ -14,12 +14,12 @@ const props = withDefaults(defineProps<Props>(), {
   collapsedRows: 1,
 });
 
-interface Props {
-  cols: number | ResponsiveValue
-  rowGap: number | ResponsiveValue
-  colGap: number | ResponsiveValue
-  collapsed: boolean
-  collapsedRows: number
+export interface Props {
+  cols?: number | ResponsiveValue
+  rowGap?: number | ResponsiveValue
+  colGap?: number | ResponsiveValue
+  collapsed?: boolean
+  collapsedRows?: number
 }
 
 const {
