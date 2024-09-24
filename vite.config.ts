@@ -42,9 +42,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: '0.0.0.0',
-      // 设置端口号
-      port: 8080,
-      // 配置代理
+      // Configure proxy
       proxy: {
         '/api': {
           target: env.VITE_BASE_URL,
