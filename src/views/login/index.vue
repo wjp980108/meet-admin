@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 defineOptions({ name: 'Login' });
 
 const loading = ref(false);
-const checked = ref(false);
+const checked = ref(true);
 const disabled = ref(false);
 
 const rules: FormRules = {
@@ -150,8 +150,8 @@ useEventListener(document, 'keypress', ({ code }) => {
       class="absolute bottom-12 w-full flex-center text-14 text-[rgba(0,0,0,0.6)] line-height-14 dark:text-[rgba(220,220,242,0.8)]"
     >
       Copyright © 2024-{{ dayjs().year() }}
-      <el-link href="https://yserp.cc/#/home" target="_blank" :underline="false">
-        &nbsp;智选云商
+      <el-link href="https://blog.wjp.plus" target="_blank" :underline="false">
+        &nbsp;{{ appName }}
       </el-link>
     </div>
   </div>
