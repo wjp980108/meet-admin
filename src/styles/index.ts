@@ -1,5 +1,5 @@
-import '@unocss/reset/eric-meyer.css';
-import '@unocss/reset/normalize.css';
+import '@unocss/reset/sanitize/sanitize.css';
+import '@unocss/reset/sanitize/assets.css';
 import '@/styles/index.scss';
 import 'virtual:uno.css';
 import 'element-plus/theme-chalk/src/message.scss';
