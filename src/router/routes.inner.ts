@@ -17,21 +17,12 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/login/index.vue'),
   },
   {
-    path: '/404',
-    name: '404',
-    meta: {
-      title: '找不到页面',
-      icon: 'icon-park-outline:ghost',
-    },
-    component: () => import('@/views/error/404/index.vue'),
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: '404',
     meta: {
-      title: '找不到页面',
-      icon: 'icon-park-outline:ghost',
+      title: '404',
+      isWithoutTab: true,
     },
-    component: () => import('@/views/error/404/index.vue'),
+    component: () => import('@/views/error/404.vue'),
   },
 ];
