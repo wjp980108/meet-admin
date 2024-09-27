@@ -13,7 +13,7 @@ const appStore = useAppStore();
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="item of routeStore.breadcrumbs" :key="item.key" :to="item.key">
         <app-flex class="whitespace-nowrap" :size="5" align="center">
-          <app-icon v-if="appStore.breadcrumbIconShow" :icon="item.icon" :size="16" />
+          <app-icon v-if="appStore.breadcrumbIconShow && item.icon" :icon="item.icon" :size="16" />
           {{ item.label }}
         </app-flex>
       </el-breadcrumb-item>

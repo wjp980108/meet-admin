@@ -130,7 +130,7 @@ const tabClass = computed(() => tabMap[appStore.tabStyle]);
         >
           <template #label>
             <div class="tabs-item" @contextmenu.prevent="handleRightClickTab($event, item)">
-              <app-icon class="tabs-icon" :icon="item.meta.icon" />
+              <app-icon v-if="item.meta.icon" class="tabs-icon" :icon="item.meta.icon" />
               {{ item.meta.title }}
             </div>
           </template>
