@@ -2,7 +2,7 @@
 import { useAppStore, useRouteStore } from '@/stores';
 import { renderIcon } from '@/utils';
 
-defineOptions({ name: 'LayBreadcrumb' });
+defineOptions({ name: 'Breadcrumb' });
 
 const routeStore = useRouteStore();
 const appStore = useAppStore();

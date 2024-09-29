@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouteStore } from '@/stores';
 
-defineOptions({ name: 'LaySearchMenu' });
+defineOptions({ name: 'SearchMenu' });
 
 const showModal = defineModel({
   type: Boolean,

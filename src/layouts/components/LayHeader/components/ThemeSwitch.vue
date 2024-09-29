@@ -3,7 +3,7 @@ import { useTheme } from '@/hooks';
 import { useAppStore } from '@/stores';
 import { renderIcon } from '@/utils';
 
-defineOptions({ name: 'AppThemeSwitch' });
+defineOptions({ name: 'ThemeSwitch' });
 
 const appStore = useAppStore();
 
@@ -17,11 +17,15 @@ function setTooltipText() {
   return themeInfo[appStore.storeColorMode];
 }
 
-function isCheck(val: string) {
-  return appStore.storeColorMode === val;
-}
+const theme = computed(() => appStore.storeColorMode);
 
 const { setColorMode } = useTheme();
+
+const themeList = [
+  { label: '浅色', value: 'light', icon: 'icon-park-outline:sun-one' },
+  { label: '深色', value: 'dark', icon: 'icon-park-outline:moon' },
+  { label: '跟随系统', value: 'auto', icon: 'icon-park-outline:laptop-computer' },
+];
 </script>
 
 <template>
@@ -38,25 +42,13 @@ const { setColorMode } = useTheme();
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
-          :icon="renderIcon('icon-park-outline:sun-one')"
-          command="light"
-          :disabled="isCheck('light')"
+          v-for="item in themeList"
+          :key="item.value"
+          :command="item.value"
+          :icon="renderIcon(item.icon)"
+          :disabled="theme === item.value"
         >
-          浅色
-        </el-dropdown-item>
-        <el-dropdown-item
-          :icon="renderIcon('icon-park-outline:moon')"
-          command="dark"
-          :disabled="isCheck('dark')"
-        >
-          深色
-        </el-dropdown-item>
-        <el-dropdown-item
-          :icon="renderIcon('icon-park-outline:laptop-computer')"
-          command="auto"
-          :disabled="isCheck('auto')"
-        >
-          跟随系统
+          {{ item.label }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

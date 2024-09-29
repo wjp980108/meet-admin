@@ -2,6 +2,8 @@
 import { languageList } from '@/constants';
 import { useAppStore } from '@/stores';
 
+defineOptions({ name: 'Language' });
+
 const appStore = useAppStore();
 const language = computed(() => appStore.language);
 </script>

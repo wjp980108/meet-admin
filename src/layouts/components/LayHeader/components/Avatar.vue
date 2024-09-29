@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores';
 import { renderIcon } from '@/utils';
 import { ElMessageBox } from 'element-plus';
 
-defineOptions({ name: 'HeaderUser' });
+defineOptions({ name: 'Avatar' });
 
 const router = useRouter();
 

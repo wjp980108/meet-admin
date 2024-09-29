@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LayHeader from '@/layouts/components/LayHeader.vue';
+import LayHeader from '@/layouts/components/LayHeader/index.vue';
 import LaySideMenu from '@/layouts/components/LaySideMenu.vue';
 import LayTabs from '@/layouts/components/LayTabs/index.vue';
 import { useAppStore, useRouteStore } from '@/stores';
