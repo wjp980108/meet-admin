@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { languageList } from '@/constants';
 import { useTheme } from '@/hooks';
 import ColorSettings from '@/layouts/components/LaySettings/components/Color.vue';
 import { useAppStore } from '@/stores';
@@ -18,6 +19,7 @@ const {
   transitionAnimation,
   tabStyle,
   watermark,
+  language,
 } = storeToRefs(appStore);
 
 const colorModeOptions = [
@@ -45,7 +47,7 @@ const { setColorMode, setMenuTheme } = useTheme();
       <el-divider>布局样式</el-divider>
       <el-segmented v-model="size" :options="layoutOptions" block />
       <el-divider>主题模式</el-divider>
-      <app-flex vertical :size="16">
+      <app-flex vertical>
         <el-segmented :model-value="storeColorMode" :options="colorModeOptions" block @change="setColorMode">
           <template #default="{ item }">
             <app-flex justify="center">
@@ -54,7 +56,7 @@ const { setColorMode, setMenuTheme } = useTheme();
           </template>
         </el-segmented>
         <app-flex align="center">
-          <app-flex :size="0">
+          <app-flex :size="0" align="center">
             侧边栏反转色
             <app-help-info message="侧边栏颜色变为深色模式" />
           </app-flex>
@@ -64,37 +66,45 @@ const { setColorMode, setMenuTheme } = useTheme();
       <el-divider>主题颜色</el-divider>
       <ColorSettings />
       <el-divider>页面设置</el-divider>
-      <app-flex justify="space-between" align="center">
-        页面切换效果
-        <el-select v-model="transitionAnimation" class="!w-120">
-          <el-option label="淡入淡出" value="fade" />
-          <el-option label="左侧淡出" value="fade-slide" />
-          <el-option label="底部消退" value="fade-bottom" />
-          <el-option label="缩放消退" value="fade-scale" />
-          <el-option label="渐变" value="zoom-fade" />
-          <el-option label="闪现" value="zoom-out" />
-          <el-option label="无" value=" " />
-        </el-select>
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        面包屑
-        <el-switch v-model="breadcrumbShow" active-text="显示" inactive-text="隐藏" inline-prompt />
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        面包屑图标
-        <el-switch v-model="breadcrumbIconShow" active-text="显示" inactive-text="隐藏" inline-prompt />
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        标签页风格
-        <el-select v-model="tabStyle" class="!w-120">
-          <el-option label="灵动" value="dynamic" />
-          <el-option label="卡片" value="card" />
-          <el-option label="朴素" value="simple" />
-        </el-select>
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        水印
-        <el-switch v-model="watermark" active-text="显示" inactive-text="隐藏" inline-prompt />
+      <app-flex vertical>
+        <app-flex justify="space-between" align="center">
+          语言
+          <el-select v-model="language" class="!w-120">
+            <el-option v-for="item of languageList" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          页面切换效果
+          <el-select v-model="transitionAnimation" class="!w-120">
+            <el-option label="淡入淡出" value="fade" />
+            <el-option label="左侧淡出" value="fade-slide" />
+            <el-option label="底部消退" value="fade-bottom" />
+            <el-option label="缩放消退" value="fade-scale" />
+            <el-option label="渐变" value="zoom-fade" />
+            <el-option label="闪现" value="zoom-out" />
+            <el-option label="无" value=" " />
+          </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          面包屑
+          <el-switch v-model="breadcrumbShow" active-text="显示" inactive-text="隐藏" inline-prompt />
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          面包屑图标
+          <el-switch v-model="breadcrumbIconShow" active-text="显示" inactive-text="隐藏" inline-prompt />
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          标签页风格
+          <el-select v-model="tabStyle" class="!w-120">
+            <el-option label="灵动" value="dynamic" />
+            <el-option label="卡片" value="card" />
+            <el-option label="朴素" value="simple" />
+          </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          水印
+          <el-switch v-model="watermark" active-text="显示" inactive-text="隐藏" inline-prompt />
+        </app-flex>
       </app-flex>
       <template #footer>
         <el-button type="danger" @click="appStore.handleAppReset">

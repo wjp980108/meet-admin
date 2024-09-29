@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LayBreadcrumb from '@/layouts/components/LayBreadcrumb.vue';
+import LayLanguage from '@/layouts/components/LayLanguage.vue';
 import LaySearch from '@/layouts/components/LaySearch.vue';
 import LaySettings from '@/layouts/components/LaySettings/index.vue';
 import LayUser from '@/layouts/components/LayUser.vue';
@@ -23,6 +24,7 @@ const { loadFlag, breadcrumbShow, fullscreen } = storeToRefs(appStore);
     </app-flex>
     <app-flex :size="5" align="center">
       <LaySearch />
+      <LayLanguage />
       <el-tooltip content="切换全屏">
         <app-wrapper @click="appStore.toggleFullScreen">
           <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />

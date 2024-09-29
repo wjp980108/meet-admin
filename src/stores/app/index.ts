@@ -1,3 +1,4 @@
+import type { LanguageType } from '@/constants';
 import type { App } from '@/stores/app/types';
 import { colorInfo } from '@/constants';
 import { useTheme } from '@/hooks';
@@ -12,6 +13,7 @@ const { store } = useColorMode({
 
 function data(): App.AppState {
   return {
+    language: 'zh-CN',
     collapse: false,
     transitionAnimation: 'fade-slide',
     loadFlag: true,
@@ -61,6 +63,11 @@ export const useAppStore = defineStore('app-store', () => {
   // 存储的主题模式
   const storeColorMode = computed(() => store.value);
 
+  // 设置语言
+  function setLanguage(lang: LanguageType) {
+    state.language = lang;
+  }
+
   // 重置所有设置
   function handleAppReset() {
     ElMessageBox.confirm('是否重置系统设置？', '温馨提示', {
@@ -81,6 +88,7 @@ export const useAppStore = defineStore('app-store', () => {
     toggleFullScreen,
     reloadPage,
     storeColorMode,
+    setLanguage,
     handleAppReset,
   };
 }, {

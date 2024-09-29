@@ -1,14 +1,13 @@
-import type { ColorInfo } from '@/constants';
+import type { ColorInfo, LanguageType } from '@/constants';
 
 declare namespace App {
-
-  type lang = 'zhCN' | 'enUS';
-
   type TransitionAnimation = '' | 'fade' | 'fade-slide' | 'fade-bottom' | 'fade-scale' | 'zoom-fade' | 'zoom-out';
 
   type TabStyle = 'dynamic' | 'card' | 'simple';
 
   interface AppState {
+    // 语言
+    language: LanguageType
     // 侧边栏是否折叠
     collapse: boolean
     // 过渡动画
