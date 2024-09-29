@@ -24,7 +24,7 @@ function handleSearchMenu() {
     <!-- 左侧 -->
     <app-flex class="overflow-hidden" :size="5" align="center">
       <el-tooltip content="刷新页面">
-        <div class="wrapper" @click="appStore.reloadPage">
+        <div class="wrapper" @click="appStore.reloadPage()">
           <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
         </div>
       </el-tooltip>
