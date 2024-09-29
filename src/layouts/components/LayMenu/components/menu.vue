@@ -3,7 +3,7 @@ import type { MenuItemRegistered } from 'element-plus';
 import { navigationFailure } from '@/constants';
 import { useNotification } from '@/hooks';
 
-defineOptions({ name: 'LayMenu' });
+defineOptions({ name: 'SubMenu' });
 defineProps<{ menuList: AppRoute.Menu[] }>();
 
 const router = useRouter();
@@ -29,7 +29,7 @@ function handleClickMenu(item: MenuItemRegistered) {
         <app-icon v-if="menu.icon" :icon="menu.icon" :size="20" />
         <span class="truncate">{{ menu.label }}</span>
       </template>
-      <lay-menu :menu-list="menu.children" />
+      <SubMenu :menu-list="menu.children" />
     </el-sub-menu>
     <el-menu-item v-else :index="menu.key" @click="handleClickMenu">
       <app-icon v-if="menu.icon" :icon="menu.icon" :size="20" />

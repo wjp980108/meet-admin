@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LayHeader from '@/layouts/components/LayHeader/index.vue';
-import LaySideMenu from '@/layouts/components/LaySideMenu.vue';
+import LayMenu from '@/layouts/components/LayMenu/index.vue';
 import LayTabs from '@/layouts/components/LayTabs/index.vue';
 import { useAppStore, useRouteStore } from '@/stores';
 
@@ -32,7 +32,7 @@ watchEffect(() => {
 <template>
   <el-watermark class="wh-full" :content="watermark ? watermarkConfig.content : ''" :font="watermarkConfig.font">
     <el-container>
-      <LaySideMenu />
+      <LayMenu />
       <el-container>
         <el-header>
           <LayHeader />

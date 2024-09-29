@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import logo from '@/assets/logo.svg';
-import LayMenu from '@/layouts/components/LayMenu.vue';
+import SubMenu from '@/layouts/components/LayMenu/components/menu.vue';
 import { useAppStore, useRouteStore } from '@/stores';
 
-defineOptions({ name: 'LaySideMenu' });
+defineOptions({ name: 'LayMenu' });
 
 const routeStore = useRouteStore();
 const { activeMenu, menus } = storeToRefs(routeStore);
@@ -30,7 +30,7 @@ const name = import.meta.env.VITE_APP_NAME;
         :collapse-transition="false"
         unique-opened
       >
-        <LayMenu :menu-list="menus" />
+        <SubMenu :menu-list="menus" />
       </el-menu>
     </el-scrollbar>
     <div class="aside-toggle-bar" @click="collapse = !collapse">
