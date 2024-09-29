@@ -12,9 +12,9 @@ const language = computed(() => appStore.language);
   <el-dropdown trigger="click" @command="appStore.setLanguage">
     <span>
       <el-tooltip content="国际化" placement="left">
-        <app-wrapper>
+        <div class="wrapper">
           <app-icon icon="ion:language" size="16" />
-        </app-wrapper>
+        </div>
       </el-tooltip>
     </span>
     <template #dropdown>

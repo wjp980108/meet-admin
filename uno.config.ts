@@ -34,6 +34,24 @@ export default defineConfig({
         [direction]: `${width}px ${style} ${color}`,
       };
     }],
+    // 动态规则，匹配 'wrapper-{padding}'
+    [/^wrapper(?:-(\d+))?$/, ([, padding], { symbols }) => {
+      return [
+        {
+          'display': 'flex',
+          'align-items': 'center',
+          'cursor': 'pointer',
+          'border-radius': '4px',
+          'padding': `${padding || 12}px`, // 使用默认值 12
+          'color': 'var(--el-text-color-primary)',
+        },
+        {
+          [symbols.selector]: selector => `${selector}:hover`,
+          'background-color': 'var(--el-color-primary-light-9)',
+          'color': 'var(--el-color-primary)',
+        },
+      ];
+    }],
   ],
   transformers: [
     transformerVariantGroup(),

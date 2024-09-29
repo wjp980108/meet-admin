@@ -32,11 +32,11 @@ const themeList = [
   <el-dropdown class="theme-switch" trigger="click" @command="setColorMode">
     <span>
       <el-tooltip :content="setTooltipText()" placement="left">
-        <app-wrapper>
+        <div class="wrapper">
           <app-icon v-if="appStore.storeColorMode === 'light'" icon="icon-park-outline:sun-one" size="16" />
           <app-icon v-if="appStore.storeColorMode === 'dark'" icon="icon-park-outline:moon" />
           <app-icon v-if="appStore.storeColorMode === 'auto'" icon="icon-park-outline:laptop-computer" />
-        </app-wrapper>
+        </div>
       </el-tooltip>
     </span>
     <template #dropdown>

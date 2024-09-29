@@ -39,9 +39,9 @@ const { setColorMode, setMenuTheme } = useTheme();
 <template>
   <div class="app-setting">
     <el-tooltip content="系统设置">
-      <app-wrapper @click="showSetting = true">
+      <div class="wrapper" @click="showSetting = true">
         <app-icon icon="icon-park-outline:setting" />
-      </app-wrapper>
+      </div>
     </el-tooltip>
     <el-drawer v-model="showSetting" class="text-14" title="系统设置" :size="290">
       <el-divider>布局样式</el-divider>

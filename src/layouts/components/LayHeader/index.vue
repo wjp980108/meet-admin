@@ -24,25 +24,25 @@ function handleSearchMenu() {
     <!-- 左侧 -->
     <app-flex class="overflow-hidden" :size="5" align="center">
       <el-tooltip content="刷新页面">
-        <app-wrapper @click="appStore.reloadPage">
+        <div class="wrapper" @click="appStore.reloadPage">
           <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
-        </app-wrapper>
+        </div>
       </el-tooltip>
       <Breadcrumb v-if="breadcrumbShow" />
     </app-flex>
     <!-- 右侧 -->
     <app-flex :size="5" align="center">
       <el-tooltip content="搜索">
-        <app-wrapper @click="handleSearchMenu">
+        <div class="wrapper" @click="handleSearchMenu">
           <app-icon icon="icon-park-outline:search" />
-        </app-wrapper>
+        </div>
       </el-tooltip>
       <Language />
       <el-tooltip content="切换全屏">
-        <app-wrapper @click="appStore.toggleFullScreen">
+        <div class="wrapper" @click="appStore.toggleFullScreen">
           <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />
           <app-icon v-else icon="icon-park-outline:full-screen-one" />
-        </app-wrapper>
+        </div>
       </el-tooltip>
       <ThemeSwitch />
       <LaySettings />
