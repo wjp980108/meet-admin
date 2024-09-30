@@ -5,6 +5,7 @@ import bg from '@/assets/login/bg.png';
 import illustration from '@/assets/login/illustration.svg';
 import logo from '@/assets/logo.svg';
 import { Constant } from '@/constants';
+import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
 import { useRouteStore, useUserStore } from '@/stores';
 import { renderIcon, storage } from '@/utils';
 import dayjs from 'dayjs';
@@ -107,7 +108,7 @@ useEventListener(document, 'keypress', ({ code }) => {
   <div class="select-none">
     <img :src="bg" class="wave" alt="">
     <div class="flex-c absolute right-5 top-3">
-      <app-theme-switch />
+      <ThemeSwitch />
     </div>
     <div class="login-container">
       <div class="img">

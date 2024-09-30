@@ -9,7 +9,7 @@ export function deptList(params?: Department.Params) {
   });
 }
 
-// 新增菜单
+// 新增部门
 export function createDept(data: Department.Data) {
   return request({
     url: '/api/department/create',
@@ -21,7 +21,7 @@ export function createDept(data: Department.Data) {
   });
 }
 
-// 编辑菜单
+// 编辑部门
 export function editDept(data: Department.Data) {
   return request({
     url: '/api/department/update',
