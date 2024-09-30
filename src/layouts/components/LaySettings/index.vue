@@ -19,7 +19,7 @@ const {
   transitionAnimation,
   tabStyle,
   watermark,
-  language,
+  locale,
 } = storeToRefs(appStore);
 
 const colorModeOptions = [
@@ -69,7 +69,7 @@ const { setColorMode, setMenuTheme } = useTheme();
       <app-flex vertical>
         <app-flex justify="space-between" align="center">
           语言
-          <el-select v-model="language" class="!w-120">
+          <el-select v-model="locale" class="!w-120" @change="appStore.setLanguage">
             <el-option v-for="item of languageList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </app-flex>

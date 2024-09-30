@@ -98,7 +98,7 @@ Meet-Admin
 │  ├─ constants            # 全局常量
 │  ├─ directives           # 全局指令文件
 │  ├─ hooks                # 常用 Hooks 封装
-│  ├─ languages            # 语言国际化 i18n
+│  ├─ locales              # 语言国际化 i18n
 │  ├─ layouts              # 框架布局模块
 │  ├─ router               # 路由管理
 │  ├─ stores               # pinia store

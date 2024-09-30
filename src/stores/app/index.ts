@@ -1,9 +1,10 @@
-import type { LanguageType } from '@/constants';
+import type { LocaleType } from '@/constants';
 import type { App } from '@/stores/app/types';
 import { colorInfo } from '@/constants';
 import { useTheme } from '@/hooks';
 import { ElMessageBox } from 'element-plus';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n';
 
 const docEle = ref(document.documentElement);
 const { isFullscreen, toggle } = useFullscreen(docEle);
@@ -13,7 +14,7 @@ const { store } = useColorMode({
 
 function data(): App.AppState {
   return {
-    language: 'zh-CN',
+    locale: 'zh-CN',
     collapse: false,
     transitionAnimation: 'fade-slide',
     loadFlag: true,
@@ -64,8 +65,10 @@ export const useAppStore = defineStore('app-store', () => {
   const storeColorMode = computed(() => store.value);
 
   // 设置语言
-  function setLanguage(lang: LanguageType) {
-    state.language = lang;
+  const { locale } = useI18n();
+  function setLanguage(lang: LocaleType) {
+    locale.value = lang;
+    state.locale = lang;
   }
 
   // 重置所有设置

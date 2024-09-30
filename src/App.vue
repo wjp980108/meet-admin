@@ -7,7 +7,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 const appStore = useAppStore();
 
 const locale = computed(() => {
-  return appStore.language === 'zh-CN' ? zhCn : en;
+  return appStore.locale === 'zh-CN' ? zhCn : en;
 });
 
 const { initTheme } = useTheme();

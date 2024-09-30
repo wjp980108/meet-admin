@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Avatar from '@/layouts/components/LayHeader/components/Avatar.vue';
 import Breadcrumb from '@/layouts/components/LayHeader/components/Breadcrumb.vue';
-import Language from '@/layouts/components/LayHeader/components/Language.vue';
+import Locale from '@/layouts/components/LayHeader/components/Locale.vue';
 import SearchMenu from '@/layouts/components/LayHeader/components/SearchMenu.vue';
 import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
 import LaySettings from '@/layouts/components/LaySettings/index.vue';
@@ -37,7 +37,7 @@ function handleSearchMenu() {
           <app-icon icon="icon-park-outline:search" />
         </div>
       </el-tooltip>
-      <Language />
+      <Locale />
       <el-tooltip content="切换全屏">
         <div class="wrapper" @click="appStore.toggleFullScreen">
           <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />

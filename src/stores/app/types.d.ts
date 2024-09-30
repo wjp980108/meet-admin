@@ -1,4 +1,4 @@
-import type { ColorInfo, LanguageType } from '@/constants';
+import type { ColorInfo, LocaleType } from '@/constants';
 
 declare namespace App {
   type TransitionAnimation = '' | 'fade' | 'fade-slide' | 'fade-bottom' | 'fade-scale' | 'zoom-fade' | 'zoom-out';
@@ -7,7 +7,7 @@ declare namespace App {
 
   interface AppState {
     // 语言
-    language: LanguageType
+    locale: LocaleType
     // 侧边栏是否折叠
     collapse: boolean
     // 过渡动画

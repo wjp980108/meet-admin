@@ -2,10 +2,10 @@
 import { languageList } from '@/constants';
 import { useAppStore } from '@/stores';
 
-defineOptions({ name: 'Language' });
+defineOptions({ name: 'Locale' });
 
 const appStore = useAppStore();
-const language = computed(() => appStore.language);
+const language = computed(() => appStore.locale);
 </script>
 
 <template>
@@ -31,7 +31,3 @@ const language = computed(() => appStore.language);
     </template>
   </el-dropdown>
 </template>
-
-<style scoped lang="scss">
-
-</style>
