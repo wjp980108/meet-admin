@@ -1,6 +1,6 @@
 # Meet-Admin
 
-<p><a href="README.zh-CN.md">中文</a> | English</p>
+<p>English | <a href="README.zh-CN.md">中文</a></p>
 
 ### Introduction
 
