@@ -14,7 +14,7 @@ Meet-Admin 一款基于 Vue3.4、TypeScript、Vite5、Pinia、Element-Plus 开�
 
 ### 项目文档
 
-- 项目更新日志：[CHANGELOG.md](./CHANGELOG.md)
+- 项目更新日志：[CHANGELOG.md](./CHANGELOG.en-US)
 
 - 项目文档地址：https://docs.wjp.plus
 
