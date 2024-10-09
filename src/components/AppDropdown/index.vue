@@ -103,8 +103,10 @@ onMounted(() => {
       <ul class="el-dropdown-menu">
         <template v-for="item of props.items" :key="item.key">
           <li v-show="item.show !== undefined ? item.show : true" class="el-dropdown-menu__item" :class="item.disabled ? 'is-disabled' : ''" tabindex="-1" @click="onMenuItemClick(item)">
-            <app-icon :icon="item.icon" />
-            <span>{{ item.label }}</span>
+            <app-icon v-if="item.icon" :icon="item.icon" />
+            <slot :item="item">
+              <span>{{ item.label }}</span>
+            </slot>
           </li>
         </template>
       </ul>

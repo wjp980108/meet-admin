@@ -5,7 +5,7 @@ export interface Axis {
 
 export interface ContextMenuItem {
   key: string
-  label: string
+  label?: string
   icon?: string
   disabled?: boolean
   show?: boolean
