@@ -5,6 +5,7 @@ import type { TabsPaneContext } from 'element-plus';
 import { navigationFailure } from '@/constants';
 import { useNotification } from '@/hooks';
 import { useAppStore, useTabStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'LayTabs' });
 
@@ -26,7 +27,7 @@ function tabClick(tabItem: TabsPaneContext) {
   const fullPath = tabItem.props.name as string;
 
   if (fullPath === route.path)
-    return notify(navigationFailure);
+    return notify(navigationFailure());
 
   router.push(fullPath);
 }
@@ -73,35 +74,29 @@ function handleSelect(menuItem: ContextMenuItem) {
 const options = computed(() => {
   const list: ContextMenuItem[] = [
     {
-      label: '刷新',
       key: 'reload',
       disabled: !(currentRoute.path === tabStore.currentTabPath),
       icon: 'icon-park-outline:redo',
     },
     {
-      label: '关闭',
       key: 'close',
       show: currentRoute.path !== '/home',
       icon: 'icon-park-outline:close',
     },
     {
-      label: '关闭其他',
       key: 'closeOther',
       icon: 'icon-park-outline:delete-four',
     },
     {
-      label: '关闭左侧',
       key: 'closeLeft',
       show: currentRoute.path !== '/home',
       icon: 'icon-park-outline:to-left',
     },
     {
-      label: '关闭右侧',
       key: 'closeRight',
       icon: 'icon-park-outline:to-right',
     },
     {
-      label: '关闭全部',
       key: 'closeAll',
       icon: 'icon-park-outline:fullwidth',
     },
@@ -137,7 +132,9 @@ const tabClass = computed(() => tabMap[appStore.tabStyle]);
         </el-tab-pane>
       </el-tabs>
     </div>
-    <app-dropdown ref="contextmenuRef" :width="120" :items="options" @menu-click="handleSelect" />
+    <app-dropdown ref="contextmenuRef" v-slot="slotProps" :width="120" :items="options" @menu-click="handleSelect">
+      <span>{{ $t(`tab.${slotProps.item.key}`) }}</span>
+    </app-dropdown>
   </div>
 </template>
 

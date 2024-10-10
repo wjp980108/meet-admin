@@ -1,17 +1,35 @@
 <script setup lang="ts">
-import { useTheme } from '@/hooks';
-import { useAppStore } from '@/stores';
-import en from 'element-plus/es/locale/lang/en';
-import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import { Constant, elLocale } from '@/constants';
+import { useEventBus, useTheme } from '@/hooks';
+import { useAppStore, useRouteStore, useTabStore } from '@/stores';
+import { $t, setDocumentTitle } from '@/utils';
 
 const appStore = useAppStore();
 
 const locale = computed(() => {
-  return appStore.locale === 'zh-CN' ? zhCn : en;
+  return elLocale[appStore.locale];
 });
 
 const { initTheme } = useTheme();
 onMounted(initTheme);
+
+const tabStore = useTabStore();
+const routeStore = useRouteStore();
+const router = useRouter();
+const route = useRoute();
+
+// 监听语言变化
+const { on } = useEventBus();
+on(Constant.LOCALE_EVENT, async () => {
+  if (route.path === '/login') {
+    setDocumentTitle($t('page.login.title'));
+  }
+  else {
+    await routeStore.initAuthRoute();
+    await router.replace(route.fullPath);
+    tabStore.tabLocale();
+  }
+});
 </script>
 
 <template>

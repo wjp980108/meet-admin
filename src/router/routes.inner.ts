@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import { $t } from '@/utils';
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -11,7 +12,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     meta: {
-      title: '登录',
+      title: $t('page.login.title'),
       isWithoutTab: true,
     },
     component: () => import('@/views/login/index.vue'),

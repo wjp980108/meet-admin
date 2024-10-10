@@ -6,6 +6,7 @@ import SearchMenu from '@/layouts/components/LayHeader/components/SearchMenu.vue
 import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
 import LaySettings from '@/layouts/components/LaySettings/index.vue';
 import { useAppStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'LayHeader' });
 
@@ -23,7 +24,7 @@ function handleSearchMenu() {
   <app-flex class="p-[5px_10px] border-b" justify="space-between" align="center">
     <!-- 左侧 -->
     <app-flex class="overflow-hidden" :size="5" align="center">
-      <el-tooltip content="刷新页面">
+      <el-tooltip :content="$t('tooltip.refreshPage')">
         <div class="wrapper" @click="appStore.reloadPage()">
           <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
         </div>
@@ -32,13 +33,13 @@ function handleSearchMenu() {
     </app-flex>
     <!-- 右侧 -->
     <app-flex :size="5" align="center">
-      <el-tooltip content="搜索">
+      <el-tooltip :content="$t('tooltip.menuQuery')">
         <div class="wrapper" @click="handleSearchMenu">
           <app-icon icon="icon-park-outline:search" />
         </div>
       </el-tooltip>
       <Locale />
-      <el-tooltip content="切换全屏">
+      <el-tooltip :content="$t('tooltip.toggleFullScreen')">
         <div class="wrapper" @click="appStore.toggleFullScreen">
           <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />
           <app-icon v-else icon="icon-park-outline:full-screen-one" />

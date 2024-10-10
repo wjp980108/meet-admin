@@ -1,9 +1,18 @@
 import { userInfo } from '@/api';
 import { useReset } from '@/hooks';
 
+interface UserSate {
+  userInfo: {
+    menus: AppRoute.RowRoute[]
+  }
+  accessToken: string
+}
+
 export const useUserStore = defineStore('user-store', () => {
-  const [state] = useReset({
-    userInfo: {},
+  const [state] = useReset<UserSate>({
+    userInfo: {
+      menus: [],
+    },
     accessToken: '',
   });
 
@@ -20,7 +29,7 @@ export const useUserStore = defineStore('user-store', () => {
   // 获取用户信息
   const getUserInfo = async () => {
     const res = await userInfo();
-    state.value.userInfo = res.data.userInfo;
+    state.value.userInfo = res.data;
     return res;
   };
 

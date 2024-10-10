@@ -2,6 +2,7 @@
 import type { AppTable } from '@/typings/table';
 import type { TableInstance, TableProps } from 'element-plus';
 import type { PropType } from 'vue';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'AppTable' });
 
@@ -11,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
   showHeader: true,
   rowKey: 'id',
   loading: false,
-  loadingText: '加载中',
+  loadingText: $t('common.loading'),
   selectOnIndeterminate: true,
   indent: 16,
 });
@@ -57,7 +58,7 @@ function handleRefresh() {
           <template #icon>
             <app-icon :class="loading ? 'is-loading' : ''" icon="Refresh" />
           </template>
-          刷新
+          {{ $t('common.refresh') }}
         </el-button>
       </table-header>
       <el-table ref="tableRef" :key="itemKey" class="flex-1" v-bind="$props" :border :row-key="rowKey" title="">

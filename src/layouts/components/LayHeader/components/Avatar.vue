@@ -2,18 +2,19 @@
 import { useUserStore } from '@/stores';
 import { renderIcon } from '@/utils';
 import { ElMessageBox } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 defineOptions({ name: 'Avatar' });
 
 const router = useRouter();
-
+const { t } = useI18n();
 const userStore = useUserStore();
 
 function handleSelect(val: string) {
   if (val === 'loginOut') {
-    ElMessageBox.confirm('您是否确认退出登录?', '温馨提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    ElMessageBox.confirm(t('confirm.content'), t('confirm.title'), {
+      confirmButtonText: t('confirm.confirm'),
+      cancelButtonText: t('confirm.cancel'),
       type: 'warning',
     }).then(() => {
       userStore.removeToken();
@@ -32,23 +33,44 @@ function handleSelect(val: string) {
           :icon="renderIcon('icon-park-outline:user')"
           command="userCenter"
         >
-          个人中心
+          {{ t('userCenter') }}
         </el-dropdown-item>
         <el-dropdown-item
           :icon="renderIcon('teenyicons:password-outline')"
           command="editPassword"
           divided
         >
-          修改密码
+          {{ t('editPassword') }}
         </el-dropdown-item>
         <el-dropdown-item
           :icon="renderIcon('icon-park-outline:logout')"
           command="loginOut"
           divided
         >
-          退出登录
+          {{ t('loginOut') }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
+
+<i18n lang="yaml">
+zh-CN:
+  userCenter: 个人中心
+  editPassword: 修改密码
+  loginOut: 退出登录
+  confirm:
+    title: 温馨提示
+    content: 您是否确定退出登录?
+    confirm: 确定
+    cancel: 取消
+en-US:
+  userCenter: User Center
+  editPassword: Edit Password
+  loginOut: Login Out
+  confirm:
+    title: Warm Tips
+    content: Are you sure you want to log out?
+    confirm: Sure
+    cancel: Cancel
+</i18n>

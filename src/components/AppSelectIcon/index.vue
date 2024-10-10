@@ -5,20 +5,20 @@ import {
   fetchAllIconCollections,
   fetchIconsByCollection,
 } from '@/components/AppSelectIcon/index';
-import { renderIcon } from '@/utils';
+import { $t, renderIcon } from '@/utils';
 import { ElInput } from 'element-plus';
 
 defineOptions({ name: 'AppSelectIcon' });
 
-withDefaults(defineProps<Props>(), {
-  placeholder: '请选择图标',
-  title: '选择图标',
-});
+const props = defineProps<Props>();
 
 interface Props {
   placeholder?: string
   title?: string
 }
+
+const placeholder = computed(() => props.placeholder || $t('components.selectIcon.placeholder'));
+const title = computed(() => props.title || $t('components.selectIcon.title'));
 
 const isShow = ref(false);
 const activeName = ref('all');

@@ -1,0 +1,146 @@
+common:
+  show: Show
+  hide: Hide
+  reset: Reset
+  loading: Loading...
+  refresh: Refresh
+  selectAll: Select all
+  list: List
+  query: Query
+  expand: Expand
+  merge: Merge
+  cancel: Cancel
+  save: Save
+  sure: Sure
+  kindTips: Kind tips
+  operationFailed: Operation failed
+  saveLoading: Saving please wait...
+  deleteLoading: Deleting please wait....
+  updateLoading: Updating please wait....
+page:
+  login:
+    title: Login
+    username: Username
+    password: Password
+    usernameError: Please enter username
+    passwordError: Please enter password
+    rememberMe: Remember me
+    forget: Forget password?
+    login: Login
+    loginSuccessful: Login successful
+    welcomeBack: Welcome back
+  404:
+    title: UH OH! You're lost.
+    content: The page you are looking for does not exist.
+      How you got here is a mystery. But you can click the button below
+      to go back to the homepage.
+    home: Home
+status:
+  success: Success
+router:
+  navigationFailure:
+    title: Navigation failed
+    message: Already at navigation target location!
+components:
+  selectIcon:
+    placeholder: Please select an icon
+    title: Icon selection
+    searchPlaceholder: Search icon
+    common: Common
+  popup:
+    title: Popup
+  table:
+    columnSettings: Column settings
+    pinToLeft: Pin to left
+    pinToRight: Pin to right
+  treeFilter:
+    placeholder: Please enter keywords to filter
+    expand: Expand all
+    packUp: Collapse all
+hooks:
+  confirm:
+    whether: Whether
+  table:
+    index: Index
+    selection: Selection
+    expand: Expand
+  theme:
+    reset: " has been reset to"
+tooltip:
+  refreshPage: Refresh Page
+  menuQuery: Menu Query
+  switchLocale: Switch Locale
+  toggleFullScreen: Toggle Full Screen
+theme:
+  light: Light Theme
+  dark: Dark Theme
+  auto: Follow The System
+  color:
+    primary: Main color
+    success: Success color
+    warning: Warning color
+    danger: Danger color
+    info: Information color
+systemSettings:
+  title: System settings
+  layout:
+    title: Layout style
+    default: Default
+    large: Large
+    small: Small
+  themeMode:
+    title: Theme mode
+    sidebar: Sidebar invert color
+    sidebarHelpInfo: Sidebar color changes to dark mode
+  themeColor:
+    title: Theme color
+  pageConfig:
+    title: Page configuration
+    locale: Locale
+    pageSwitching: Page switching effect
+    effect:
+      fade: Fade in and out
+      fade-slide: Fade left
+      fade-bottom: Bottom fades
+      fade-scale: Zoom fades
+      zoom-fade: Gradual change
+      zoom-out: Flash
+      no: no
+  breadcrumbs:
+    title: Breadcrumbs
+    icon: Breadcrumbs icon
+  tabStyle:
+    title: Tab style
+    dynamic: Smart
+    card: Card
+    simple: Simple
+  watermark: Watermark
+  isReset: Whether to reset system settings?
+tab:
+  reload: Refresh
+  close: Close
+  closeOther: Close other
+  closeLeft: Close left
+  closeRight: Close right
+  closeAll: Close all
+axios:
+  loadingText: Loading please wait...
+  errorStatus:
+    cancel: Automatically cancel duplicate requests!
+    302: The interface has been redirected!
+    400: Parameter is incorrect!
+    401: You are not logged in, or your login has timed out, please log in first!
+    403: You do not have permission to operate!
+    404: An error occurred while requesting the address!
+    408: Request timeout!
+    409: The same data already exists in the system!
+    500: Server internal error!
+    501: Service not implemented!
+    502: Gateway error!
+    503: Service unavailable!
+    504: This service is temporarily unavailable, please try again later!
+    505: HTTP version is not supported!
+    default: Abnormal problems, please contact the website administrator!
+    timeout: Network request timeout!
+    abnormal: Server exception!
+    disconnect: You have been disconnected!

@@ -1,3 +1,4 @@
+import { $t } from '@/utils';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 type MessageType = '' | 'success' | 'warning' | 'info' | 'error';
@@ -13,20 +14,20 @@ type MessageType = '' | 'success' | 'warning' | 'info' | 'error';
  */
 export function useConfirm(api: (params: any) => Promise<any>, params: any = {}, message: string, confirmType: MessageType = 'warning') {
   return new Promise((resolve, reject) => {
-    ElMessageBox.confirm(`是否${message}？`, '温馨提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    ElMessageBox.confirm(`${$t('hooks.confirm.whether')}${message}？`, $t('common.kindTips'), {
+      confirmButtonText: $t('common.sure'),
+      cancelButtonText: $t('common.cancel'),
       type: confirmType,
       draggable: true,
     })
       .then(async () => {
         const res = await api(params);
         if (!res)
-          return reject(new Error('操作失败'));
+          return reject(new Error($t('common.operationFailed')));
 
         ElMessage({
           type: 'success',
-          message: `${message}成功!`,
+          message: `${message}${$t('status.success')}!`,
         });
         resolve(true);
       });

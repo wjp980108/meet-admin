@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { APIv2CollectionResponse } from '@/components/AppSelectIcon/index';
-import { renderIcon } from '@/utils';
+import { $t, renderIcon } from '@/utils';
 import { Icon } from '@iconify/vue';
 
 defineOptions({ name: 'TabContent' });
@@ -46,8 +46,11 @@ function handleIcon(val: string) {
 <template>
   <app-flex vertical :size="4">
     <app-flex>
-      <el-input v-model="searchIcon" placeholder="搜索图标" :prefix-icon="renderIcon('line-md:search')" clearable />
-      <el-text>共 {{ filterIcons.length }} 个</el-text>
+      <el-input
+        v-model="searchIcon" :placeholder="$t('components.selectIcon.searchPlaceholder')"
+        :prefix-icon="renderIcon('line-md:search')" clearable
+      />
+      <el-text>{{ $t('components.selectIcon.common') }} {{ filterIcons.length }}</el-text>
     </app-flex>
     <el-scrollbar height="calc(470px - 14px - 8px - 32px - 32px - 8px)">
       <app-flex :size="0">

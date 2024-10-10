@@ -14,7 +14,6 @@ export function login(data: AnyObj) {
 }
 
 export interface UserInfo {
-  userInfo: AnyObj
   menus: AppRoute.RowRoute[]
 }
 

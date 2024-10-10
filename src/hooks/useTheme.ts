@@ -1,7 +1,7 @@
 import { colorInfo } from '@/constants';
 import { useAppStore } from '@/stores';
 import { menuTheme } from '@/styles/theme';
-import { getDarkColor, getLightColor } from '@/utils';
+import { $t, getDarkColor, getLightColor } from '@/utils';
 
 const { system, store } = useColorMode({
   emitAuto: true,
@@ -38,7 +38,7 @@ export function useTheme() {
   function changeTheme(val: string | null, type: string) {
     if (!val) {
       val = colorInfo[type].color;
-      ElMessage({ type: 'success', message: `${colorInfo[type].desc}颜色已重置为 ${val}` });
+      ElMessage({ type: 'success', message: `${$t(`theme.color.${type}`)}${$t('hooks.theme.reset')} ${val}` });
     }
 
     const typeText = `--el-color-${type}`;

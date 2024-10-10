@@ -14,7 +14,7 @@ const { notify } = useNotification();
 // 点击菜单切换路由
 function handleClickMenu(item: MenuItemRegistered) {
   if (item.index === route.path)
-    return notify(navigationFailure);
+    return notify(navigationFailure());
 
   if (item.index) {
     router.push(item.index);

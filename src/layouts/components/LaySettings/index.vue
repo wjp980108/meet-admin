@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { languageList } from '@/constants';
+import { localeList } from '@/constants';
 import { useTheme } from '@/hooks';
 import ColorSettings from '@/layouts/components/LaySettings/components/Color.vue';
 import { useAppStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'LaySettings' });
-
-const showSetting = ref(false);
 
 const appStore = useAppStore();
 
@@ -22,31 +21,36 @@ const {
   locale,
 } = storeToRefs(appStore);
 
+const showSetting = ref(false);
+
 const colorModeOptions = [
   { label: 'light', value: 'light', icon: 'icon-park-outline:sun-one' },
   { label: 'dark', value: 'dark', icon: 'icon-park-outline:moon' },
   { label: 'auto', value: 'auto', icon: 'icon-park-outline:laptop-computer' },
 ];
 
-const layoutOptions = [
-  { label: '默认', value: 'default' },
-  { label: '大', value: 'large' },
-  { label: '小', value: 'small' },
-];
+const layoutOptions = ['default', 'large', 'small'];
+
 const { setColorMode, setMenuTheme } = useTheme();
 </script>
 
 <template>
   <div class="app-setting">
-    <el-tooltip content="系统设置">
+    <el-tooltip :content="$t('systemSettings.title')">
       <div class="wrapper" @click="showSetting = true">
         <app-icon icon="icon-park-outline:setting" />
       </div>
     </el-tooltip>
-    <el-drawer v-model="showSetting" class="text-14" title="系统设置" :size="290">
-      <el-divider>布局样式</el-divider>
-      <el-segmented v-model="size" :options="layoutOptions" block />
-      <el-divider>主题模式</el-divider>
+    <el-drawer v-model="showSetting" class="text-14" :title="$t('systemSettings.title')" :size="350">
+      <!-- 布局样式 -->
+      <el-divider>{{ $t('systemSettings.layout.title') }}</el-divider>
+      <el-segmented v-model="size" :options="layoutOptions" block>
+        <template #default="{ item }">
+          {{ $t(`systemSettings.layout.${item}`) }}
+        </template>
+      </el-segmented>
+      <!-- 主题模式 -->
+      <el-divider>{{ $t('systemSettings.themeMode.title') }}</el-divider>
       <app-flex vertical>
         <el-segmented :model-value="storeColorMode" :options="colorModeOptions" block @change="setColorMode">
           <template #default="{ item }">
@@ -57,58 +61,60 @@ const { setColorMode, setMenuTheme } = useTheme();
         </el-segmented>
         <app-flex align="center">
           <app-flex :size="0" align="center">
-            侧边栏反转色
-            <app-help-info message="侧边栏颜色变为深色模式" />
+            {{ $t('systemSettings.themeMode.sidebar') }}
+            <app-help-info :message="$t('systemSettings.themeMode.sidebarHelpInfo')" />
           </app-flex>
           <el-switch v-model="asideInverted" @change="setMenuTheme" />
         </app-flex>
       </app-flex>
-      <el-divider>主题颜色</el-divider>
+      <!-- 主题颜色 -->
+      <el-divider>{{ $t('systemSettings.themeColor.title') }}</el-divider>
       <ColorSettings />
-      <el-divider>页面设置</el-divider>
+      <!-- 页面设置 -->
+      <el-divider>{{ $t('systemSettings.pageConfig.title') }}</el-divider>
       <app-flex vertical>
         <app-flex justify="space-between" align="center">
-          语言
-          <el-select v-model="locale" class="!w-120" @change="appStore.setLanguage">
-            <el-option v-for="item of languageList" :key="item.value" :label="item.label" :value="item.value" />
+          {{ $t('systemSettings.pageConfig.locale') }}
+          <el-select v-model="locale" class="!w-155" @change="appStore.setLocale">
+            <el-option v-for="item of localeList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </app-flex>
         <app-flex justify="space-between" align="center">
-          页面切换效果
-          <el-select v-model="transitionAnimation" class="!w-120">
-            <el-option label="淡入淡出" value="fade" />
-            <el-option label="左侧淡出" value="fade-slide" />
-            <el-option label="底部消退" value="fade-bottom" />
-            <el-option label="缩放消退" value="fade-scale" />
-            <el-option label="渐变" value="zoom-fade" />
-            <el-option label="闪现" value="zoom-out" />
-            <el-option label="无" value=" " />
+          {{ $t('systemSettings.pageConfig.pageSwitching') }}
+          <el-select v-model="transitionAnimation" class="!w-155">
+            <el-option :label="$t('systemSettings.pageConfig.effect.fade')" value="fade" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.fade-slide')" value="fade-slide" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.fade-bottom')" value="fade-bottom" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.fade-scale')" value="fade-scale" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.zoom-fade')" value="zoom-fade" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.zoom-out')" value="zoom-out" />
+            <el-option :label="$t('systemSettings.pageConfig.effect.no')" value=" " />
           </el-select>
         </app-flex>
         <app-flex justify="space-between" align="center">
-          面包屑
-          <el-switch v-model="breadcrumbShow" active-text="显示" inactive-text="隐藏" inline-prompt />
+          {{ $t('systemSettings.breadcrumbs.title') }}
+          <el-switch v-model="breadcrumbShow" :active-text="$t('common.show')" :inactive-text="$t('common.hide')" inline-prompt />
         </app-flex>
         <app-flex justify="space-between" align="center">
-          面包屑图标
-          <el-switch v-model="breadcrumbIconShow" active-text="显示" inactive-text="隐藏" inline-prompt />
+          {{ $t('systemSettings.breadcrumbs.icon') }}
+          <el-switch v-model="breadcrumbIconShow" :active-text="$t('common.show')" :inactive-text="$t('common.hide')" inline-prompt />
         </app-flex>
         <app-flex justify="space-between" align="center">
-          标签页风格
-          <el-select v-model="tabStyle" class="!w-120">
-            <el-option label="灵动" value="dynamic" />
-            <el-option label="卡片" value="card" />
-            <el-option label="朴素" value="simple" />
+          {{ $t('systemSettings.tabStyle.title') }}
+          <el-select v-model="tabStyle" class="!w-155">
+            <el-option :label="$t('systemSettings.tabStyle.dynamic')" value="dynamic" />
+            <el-option :label="$t('systemSettings.tabStyle.card')" value="card" />
+            <el-option :label="$t('systemSettings.tabStyle.simple')" value="simple" />
           </el-select>
         </app-flex>
         <app-flex justify="space-between" align="center">
-          水印
-          <el-switch v-model="watermark" active-text="显示" inactive-text="隐藏" inline-prompt />
+          {{ $t('systemSettings.watermark') }}
+          <el-switch v-model="watermark" :active-text="$t('common.show')" :inactive-text="$t('common.hide')" inline-prompt />
         </app-flex>
       </app-flex>
       <template #footer>
         <el-button type="danger" @click="appStore.handleAppReset">
-          重置
+          {{ $t('common.reset') }}
         </el-button>
       </template>
     </el-drawer>
