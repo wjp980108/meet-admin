@@ -69,6 +69,7 @@
     "gsap": "^3.12.5",
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
+    "mitt": "^3.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.4",
     "pinia-plugin-persistedstate": "^4.1.1",
