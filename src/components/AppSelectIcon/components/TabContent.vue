@@ -50,15 +50,17 @@ function handleIcon(val: string) {
         v-model="searchIcon" :placeholder="$t('components.selectIcon.searchPlaceholder')"
         :prefix-icon="renderIcon('line-md:search')" clearable
       />
-      <el-text>{{ $t('components.selectIcon.common') }} {{ filterIcons.length }}</el-text>
+      <el-text class="text-nowrap" type="primary">
+        {{ $t('components.selectIcon.common') }} {{ filterIcons.length }}
+      </el-text>
     </app-flex>
     <el-scrollbar height="calc(470px - 14px - 8px - 32px - 32px - 8px)">
-      <app-flex :size="0">
-        <app-wrapper v-for="(icon, index) of paginatedIcons" :key="index" class="p-7" @click="handleIcon(icon!)">
+      <app-flex :size="0" wrap>
+        <div v-for="(icon, index) of paginatedIcons" :key="index" class="wrapper !p-8" @click="handleIcon(icon!)">
           <app-flex justify="center" align="center" class="h-26 w-26">
             <Icon :icon="icon!" class="text-26" />
           </app-flex>
-        </app-wrapper>
+        </div>
         <el-empty v-if="!paginatedIcons.length" class="w-full" description="暂无图标" />
       </app-flex>
     </el-scrollbar>
