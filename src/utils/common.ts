@@ -26,3 +26,12 @@ export function flattenTableData<T>(dataList: T[], key: keyof T): T[] {
   });
   return list;
 }
+
+/**
+ * 设置文档标题
+ *
+ * @param title - 标题
+ */
+export function setDocumentTitle(title: string) {
+  document.title = `${title} - ${import.meta.env.VITE_APP_NAME}`;
+}
