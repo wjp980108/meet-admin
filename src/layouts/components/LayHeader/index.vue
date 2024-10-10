@@ -18,6 +18,16 @@ const showSearchMenu = ref(false);
 function handleSearchMenu() {
   showSearchMenu.value = true;
 }
+
+// 监听窗口大小, 自动隐藏面包屑
+const { width } = useWindowSize();
+const isShowBreadcrumb = ref(true);
+
+watch(width, useDebounceFn(() => {
+  isShowBreadcrumb.value = width.value > 768;
+}, 100), {
+  immediate: true,
+});
 </script>
 
 <template>
@@ -29,7 +39,7 @@ function handleSearchMenu() {
           <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
         </div>
       </el-tooltip>
-      <Breadcrumb v-if="breadcrumbShow" />
+      <Breadcrumb v-if="isShowBreadcrumb && breadcrumbShow" />
     </app-flex>
     <!-- 右侧 -->
     <app-flex :size="5" align="center">
