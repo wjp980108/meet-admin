@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios';
 import { router } from '@/router';
 import { useUserStore } from '@/stores/user';
+import { $t, i18n } from '@/utils';
 import axios from 'axios';
 import { ElLoading, ElMessage } from 'element-plus';
 import qs from 'qs';
@@ -33,7 +34,7 @@ function createAxios<Data = any, T = AppAxios.ApiPromise<Data>>(axiosConfig: Axi
   const config: AppAxios.Options = {
     cancelDuplicateRequest: true,
     loading: false,
-    loadingText: '加载中，请稍等...',
+    loadingText: $t('axios.loadingText'),
     message: false,
     messageText: '',
     showErrorMessage: true,
@@ -60,6 +61,9 @@ function createAxios<Data = any, T = AppAxios.ApiPromise<Data>>(axiosConfig: Axi
         config.headers.Authorization = `Bearer ${userStore.accessToken}`;
       }
 
+      // 自动携带当前语言
+      config.headers['Accept-Language'] = i18n.global.locale.value;
+
       return config;
     },
     (error) => {
@@ -81,8 +85,8 @@ function createAxios<Data = any, T = AppAxios.ApiPromise<Data>>(axiosConfig: Axi
 
       // 登录过期
       if (data.code === 1) {
-        userStore.removeToken();
         await router.push('/login');
+        userStore.handleReset();
         ElMessage.error({
           message: data.message,
         });
@@ -196,57 +200,57 @@ function closeLoading() {
 function httpErrorStatusHandle(error: any) {
   // 处理被取消的请求
   if (axios.isCancel(error))
-    return console.error(`自动取消重复请求${error.message}`);
+    return console.error(`${$t('axios.errorStatus.cancel')}${error.message}`);
   let message = '';
   if (error && error.response) {
     switch (error.response.status) {
       case 302:
-        message = '接口已重定向!';
+        message = $t('axios.errorStatus.302');
         break;
       case 400:
-        message = '参数不正确!';
+        message = $t('axios.errorStatus.400');
         break;
       case 401:
-        message = '您未登录, 或者登录已经超时, 请先登录!';
+        message = $t('axios.errorStatus.401');
         break;
       case 403:
-        message = '您没有操作权限!';
+        message = $t('axios.errorStatus.403');
         break;
       case 404:
-        message = `请求地址时出错: ${error.response.config.url}`;
+        message = `${$t('axios.errorStatus.404')}: ${error.response.config.url}`;
         break;
       case 408:
-        message = '请求超时!';
+        message = $t('axios.errorStatus.408');
         break;
       case 409:
-        message = '系统中已存在相同的数据!';
+        message = $t('axios.errorStatus.409');
         break;
       case 500:
-        message = '服务器内部错误!';
+        message = $t('axios.errorStatus.500');
         break;
       case 501:
-        message = '未实现服务!';
+        message = $t('axios.errorStatus.501');
         break;
       case 502:
-        message = '网管错误!';
+        message = $t('axios.errorStatus.502');
         break;
       case 503:
-        message = '服务不可用!';
+        message = $t('axios.errorStatus.503');
         break;
       case 504:
-        message = '该服务暂时不可用。请稍后再试!';
+        message = $t('axios.errorStatus.504');
         break;
       case 505:
-        message = '不支持HTTP版本!';
+        message = $t('axios.errorStatus.505');
         break;
       default:
-        message = '异常问题，请联系网站管理员!';
+        message = $t('axios.errorStatus.default');
         break;
     }
   }
   if (error.message.includes('timeout'))
-    message = '网络请求超时!';
+    message = $t('axios.errorStatus.timeout');
   if (error.message.includes('Network'))
-    message = window.navigator.onLine ? '服务器异常!' : '您已断开连接!';
+    message = window.navigator.onLine ? $t('axios.errorStatus.abnormal') : $t('axios.errorStatus.disconnect');
   ElMessage.error(message);
 }

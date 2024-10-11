@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import { $t } from '@/utils';
 import { computed, type PropType } from 'vue';
 
 defineOptions({ name: 'AppPopup' });
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: '弹窗',
-  },
+  title: String,
   width: {
     type: [String, Number],
     default: 600,
@@ -32,10 +30,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  confirmText: {
-    type: String,
-    default: '保存',
-  },
+  confirmText: String,
   showFooter: {
     type: Boolean,
     default: true,
@@ -44,10 +39,7 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  cancelText: {
-    type: String,
-    default: '取消',
-  },
+  cancelText: String,
   showCancelButton: {
     type: Boolean,
     default: true,
@@ -68,6 +60,10 @@ const isPopup = defineModel({
   type: Boolean,
   default: false,
 });
+
+const title = computed(() => props.title || $t('components.popup.title'));
+const confirmText = computed(() => props.confirmText || $t('common.save'));
+const cancelText = computed(() => props.cancelText || $t('common.cancel'));
 
 // 是否是翻转
 const isReverse = computed(() => {

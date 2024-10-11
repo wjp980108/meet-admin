@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import gsap from 'gsap';
+import { $t } from '../../utils';
 
 defineOptions({ name: '404' });
 
@@ -447,14 +448,10 @@ onMounted(() => {
       </div>
       <div class="col">
         <h1>404</h1>
-        <h2>UH OH! You're lost.</h2>
-        <p>
-          The page you are looking for does not exist.
-          How you got here is a mystery. But you can click the button below
-          to go back to the homepage.
-        </p>
+        <h2>{{ $t('page.404.title') }}</h2>
+        <p>{{ $t('page.404.content') }}</p>
         <el-button class="w-160" type="primary" size="large" round plain @click="handleHome">
-          首页
+          {{ $t('page.404.home') }}
         </el-button>
       </div>
     </div>

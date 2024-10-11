@@ -1,7 +1,9 @@
 import type { LocaleType } from '@/constants';
 import type { App } from '@/stores/app/types';
-import { colorInfo } from '@/constants';
+import { colorInfo, Constant } from '@/constants';
 import { useTheme } from '@/hooks';
+import { useEventBus } from '@/hooks/useEventBus';
+import { $t } from '@/utils';
 import { ElMessageBox } from 'element-plus';
 import { cloneDeep } from 'lodash-es';
 import { useI18n } from 'vue-i18n';
@@ -66,16 +68,18 @@ export const useAppStore = defineStore('app-store', () => {
 
   // 设置语言
   const { locale } = useI18n();
-  function setLanguage(lang: LocaleType) {
+  const { emit } = useEventBus();
+  function setLocale(lang: LocaleType) {
     locale.value = lang;
     state.locale = lang;
+    emit(Constant.LOCALE_EVENT);
   }
 
   // 重置所有设置
   function handleAppReset() {
-    ElMessageBox.confirm('是否重置系统设置？', '温馨提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
+    ElMessageBox.confirm($t('systemSettings.isReset'), $t('common.kindTips'), {
+      confirmButtonText: $t('common.sure'),
+      cancelButtonText: $t('common.cancel'),
       type: 'warning',
       draggable: true,
     }).then(() => {
@@ -91,7 +95,7 @@ export const useAppStore = defineStore('app-store', () => {
     toggleFullScreen,
     reloadPage,
     storeColorMode,
-    setLanguage,
+    setLocale,
     handleAppReset,
   };
 }, {

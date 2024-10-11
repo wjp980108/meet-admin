@@ -2,6 +2,7 @@ import type { App } from 'vue';
 import NProgress from '@/config/nprogress';
 import { routes } from '@/router/routes.inner';
 import { useRouteStore, useTabStore, useUserStore } from '@/stores';
+import { $t, setDocumentTitle } from '@/utils';
 import { createRouter, createWebHistory } from 'vue-router';
 
 export const router = createRouter({
@@ -62,7 +63,7 @@ export async function installRouter(app: App) {
 
   router.afterEach((to) => {
     // 修改网页标题
-    document.title = `${to.meta.title} - ${import.meta.env.VITE_APP_NAME}`;
+    setDocumentTitle(to.path === '/login' ? $t('page.login.title') : to.meta.title);
 
     // 结束 NProgress
     NProgress.done();

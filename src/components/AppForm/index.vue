@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Props as AppGridProps } from '@/components/AppGrid/index.vue';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'AppForm' });
 
@@ -33,13 +34,13 @@ const gridRef = ref();
       <app-form-item suffix>
         <app-flex>
           <el-button type="primary" @click="search">
-            查询
+            {{ $t('common.query') }}
           </el-button>
           <el-button class="!m-0" @click="reset">
-            重置
+            {{ $t('common.reset') }}
           </el-button>
           <el-button type="primary" link class="!m-0" @click="collapsed = !collapsed">
-            {{ collapsed ? "展开" : "合并" }}
+            {{ collapsed ? $t('common.expand') : $t('common.merge') }}
             <app-icon :icon="collapsed ? 'ArrowDown' : 'ArrowUp'" />
           </el-button>
         </app-flex>

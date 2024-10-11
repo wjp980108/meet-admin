@@ -1,7 +1,7 @@
 import type { AppTable } from '@/typings/table';
 import { useReset } from '@/hooks/useReset';
 import { useTableSpan } from '@/hooks/useTableSpan';
-import { flattenTableData } from '@/utils';
+import { $t, flattenTableData } from '@/utils';
 
 /**
  * 创建一个表格使用的函数
@@ -185,9 +185,9 @@ function createColumnCheck(column: AppTable.TableColumn): AppTable.TableColumnCh
  */
 function getColumnDefaultLabel(type?: string): string {
   switch (type) {
-    case 'index': return '序号';
-    case 'selection': return '勾选';
-    case 'expand': return '展开';
+    case 'index': return $t('hooks.table.index');
+    case 'selection': return $t('hooks.table.selection');
+    case 'expand': return $t('hooks.table.expand');
     default: return '';
   }
 }

@@ -5,9 +5,10 @@ import bg from '@/assets/login/bg.png';
 import illustration from '@/assets/login/illustration.svg';
 import logo from '@/assets/logo.svg';
 import { Constant } from '@/constants';
+import Locale from '@/layouts/components/LayHeader/components/Locale.vue';
 import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
 import { useRouteStore, useUserStore } from '@/stores';
-import { renderIcon, storage } from '@/utils';
+import { $t, renderIcon, storage } from '@/utils';
 import dayjs from 'dayjs';
 
 defineOptions({ name: 'Login' });
@@ -18,10 +19,10 @@ const disabled = ref(false);
 
 const rules: FormRules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { required: true, message: $t('page.login.usernameError'), trigger: 'blur' },
   ],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
+    { required: true, message: $t('page.login.passwordError'), trigger: 'blur' },
   ],
 };
 
@@ -82,8 +83,8 @@ function handleLogin() {
       await routeStore.initAuthRoute();
       router.push('/').then(() => {
         ElNotification.success({
-          title: '登录成功',
-          message: '欢迎回来',
+          title: $t('page.login.loginSuccessful'),
+          message: $t('page.login.welcomeBack'),
           duration: 2500,
         });
       }).finally(() => {
@@ -107,7 +108,8 @@ useEventListener(document, 'keypress', ({ code }) => {
 <template>
   <div class="select-none">
     <img :src="bg" class="wave" alt="">
-    <div class="flex-c absolute right-5 top-3">
+    <div class="absolute right-5 top-3">
+      <Locale />
       <ThemeSwitch />
     </div>
     <div class="login-container">
@@ -122,25 +124,25 @@ useEventListener(document, 'keypress', ({ code }) => {
           </h2>
           <el-form ref="formRef" :model="state" :rules="rules" size="large">
             <el-form-item prop="username">
-              <el-input v-model="state.username" clearable placeholder="账号" :prefix-icon="renderIcon('UserFilled')" />
+              <el-input v-model="state.username" clearable :placeholder="$t('page.login.username')" :prefix-icon="renderIcon('UserFilled')" />
             </el-form-item>
             <el-form-item prop="password">
               <el-input
-                v-model="state.password" placeholder="密码" :prefix-icon="renderIcon('bxs:lock')" clearable
+                v-model="state.password" :placeholder="$t('page.login.password')" :prefix-icon="renderIcon('bxs:lock')" clearable
                 show-password
               />
             </el-form-item>
             <el-form-item>
               <div class="h-[20px] w-full flex items-center justify-between">
                 <el-checkbox v-model="checked">
-                  记住我
+                  {{ $t('page.login.rememberMe') }}
                 </el-checkbox>
                 <el-link type="primary" :underline="false">
-                  &nbsp;忘记密码？
+                  {{ $t('page.login.forget') }}
                 </el-link>
               </div>
               <el-button class="mt-16 w-full" type="primary" size="default" :loading :disabled @click="handleLogin">
-                登录
+                {{ $t('page.login.login') }}
               </el-button>
             </el-form-item>
           </el-form>

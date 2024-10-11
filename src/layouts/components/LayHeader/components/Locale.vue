@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { languageList } from '@/constants';
+import { localeList } from '@/constants';
 import { useAppStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'Locale' });
 
@@ -9,9 +10,9 @@ const language = computed(() => appStore.locale);
 </script>
 
 <template>
-  <el-dropdown trigger="click" @command="appStore.setLanguage">
+  <el-dropdown trigger="click" @command="appStore.setLocale">
     <span>
-      <el-tooltip content="国际化" placement="left">
+      <el-tooltip :content="$t('tooltip.switchLocale')" placement="left">
         <div class="wrapper">
           <app-icon icon="ion:language" size="16" />
         </div>
@@ -20,7 +21,7 @@ const language = computed(() => appStore.locale);
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
-          v-for="item in languageList"
+          v-for="item in localeList"
           :key="item.value"
           :command="item.value"
           :disabled="language === item.value"

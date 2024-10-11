@@ -1,3 +1,4 @@
+import { $t } from '@/utils';
 import request from '@/utils/axios';
 
 // 获取用户列表
@@ -17,7 +18,7 @@ export function createUser(data: User.Data) {
     data,
   }, {
     loading: true,
-    loadingText: '保存中，请稍等...',
+    loadingText: $t('common.saveLoading'),
   });
 }
 
@@ -29,7 +30,7 @@ export function editUser(data: User.Data) {
     data,
   }, {
     loading: true,
-    loadingText: '保存中，请稍等...',
+    loadingText: $t('common.saveLoading'),
   });
 }
 
@@ -43,7 +44,7 @@ export function deleteUser(id: string) {
     },
   }, {
     loading: true,
-    loadingText: '删除中，请稍等...',
+    loadingText: $t('common.deleteLoading'),
   });
 }
 
@@ -55,7 +56,7 @@ export function upUserStatus(data: { id: string, isEnabled: boolean }) {
     data,
   }, {
     loading: true,
-    loadingText: '更新中，请稍等...',
+    loadingText: $t('common.updateLoading'),
   });
 }
 

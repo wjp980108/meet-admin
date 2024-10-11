@@ -1,6 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router';
 import { useReset } from '@/hooks';
 import { router } from '@/router';
+import { useUserStore } from '@/stores';
 
 interface TabState {
   // tab列表
@@ -10,10 +11,12 @@ interface TabState {
 }
 
 export const useTabStore = defineStore('tab-store', () => {
-  const [state] = useReset<TabState>({
+  const [state, reset] = useReset<TabState>({
     tabs: [],
     currentTabPath: '',
   });
+
+  const userStore = useUserStore();
 
   const currentTabPath = toRef(state.value, 'currentTabPath');
 
@@ -48,6 +51,17 @@ export const useTabStore = defineStore('tab-store', () => {
 
     if (homeRoute)
       state.value.tabs.push(homeRoute!);
+  };
+
+  // 标签国际化
+  const tabLocale = () => {
+    const { userInfo } = storeToRefs(userStore);
+    const menuMap = new Map(userInfo.value.menus.map(menu => [menu.path, menu.title]));
+    state.value.tabs.forEach((item) => {
+      if (menuMap.has(item.path)) {
+        item.meta.title = menuMap.get(item.path)!;
+      }
+    });
   };
 
   // 添加标签
@@ -152,12 +166,14 @@ export const useTabStore = defineStore('tab-store', () => {
     ...toRefs(state.value),
     setCurrentTab,
     initTab,
+    tabLocale,
     addTab,
     closeTab,
     closeOtherTabs,
     closeLeftTabs,
     closeRightTabs,
     closeAllTabs,
+    handleReset: reset,
   };
 }, {
   persist: {

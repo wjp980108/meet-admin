@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTheme } from '@/hooks';
 import { useAppStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'ColorSettings' });
 
@@ -13,23 +14,23 @@ const { predefineColors, changeTheme } = useTheme();
 <template>
   <app-flex vertical>
     <app-flex justify="space-between" align="center">
-      主色
+      {{ $t('theme.color.primary') }}
       <el-color-picker :model-value="themeColor.primary.color" :predefine="predefineColors" @change="changeTheme($event, 'primary')" />
     </app-flex>
     <app-flex justify="space-between" align="center">
-      成功色
+      {{ $t('theme.color.success') }}
       <el-color-picker :model-value="themeColor.success.color" :predefine="predefineColors" @change="changeTheme($event, 'success')" />
     </app-flex>
     <app-flex justify="space-between" align="center">
-      警告色
+      {{ $t('theme.color.warning') }}
       <el-color-picker :model-value="themeColor.warning.color" :predefine="predefineColors" @change="changeTheme($event, 'warning')" />
     </app-flex>
     <app-flex justify="space-between" align="center">
-      危险色
+      {{ $t('theme.color.danger') }}
       <el-color-picker :model-value="themeColor.danger.color" :predefine="predefineColors" @change="changeTheme($event, 'danger')" />
     </app-flex>
     <app-flex justify="space-between" align="center">
-      信息色
+      {{ $t('theme.color.info') }}
       <el-color-picker :model-value="themeColor.info.color" :predefine="predefineColors" @change="changeTheme($event, 'info')" />
     </app-flex>
   </app-flex>

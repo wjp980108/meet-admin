@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { AppTable } from '@/typings/table';
+import { $t, renderIcon } from '@/utils';
 import { cloneDeep } from 'lodash-es';
 import { VueDraggable } from 'vue-draggable-plus';
 
 defineOptions({ name: 'TableHeader' });
 
 withDefaults(defineProps<Props>(), {
-  title: '列表',
+  title: $t('common.list'),
 });
 
 interface Props {
@@ -67,14 +68,16 @@ function handleFixed(val: AppTable.TableColumnCheck, type: 'left' | 'right') {
     <app-flex>
       <slot />
       <el-dropdown trigger="click" :hide-on-click="false">
-        <el-button>列设置</el-button>
+        <el-button :icon="renderIcon('Setting')">
+          {{ $t('components.table.columnSettings') }}
+        </el-button>
         <template #dropdown>
           <div class="flex-y-center justify-between p-[2px_10px_0] border-b">
             <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate">
-              全选
+              {{ $t('common.selectAll') }}
             </el-checkbox>
             <el-link type="primary" :underline="false" @click="handleRepossess">
-              重置
+              {{ $t('common.reset') }}
             </el-link>
           </div>
           <el-scrollbar max-height="36vh">
@@ -89,10 +92,10 @@ function handleFixed(val: AppTable.TableColumnCheck, type: 'left' | 'right') {
                       </el-checkbox>
                     </app-flex>
                     <app-flex :size="2">
-                      <el-tooltip content="固定到左侧">
+                      <el-tooltip :content="$t('components.table.pinToLeft')">
                         <app-icon icon="icon-park-outline:to-left" size="16" @click="handleFixed(item, 'left')" />
                       </el-tooltip>
-                      <el-tooltip content="固定到右侧">
+                      <el-tooltip :content="$t('components.table.pinToRight')">
                         <app-icon icon="icon-park-outline:to-right" size="16" @click="handleFixed(item, 'right')" />
                       </el-tooltip>
                     </app-flex>

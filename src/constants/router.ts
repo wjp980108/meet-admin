@@ -1,8 +1,11 @@
 import type { NotificationParamsTyped } from 'element-plus/es/components/notification/src/notification';
+import { $t } from '@/utils';
 
-export const navigationFailure: NotificationParamsTyped = {
-  type: 'error',
-  title: '导航失败',
-  message: '已在导航目标位置！',
-  duration: 2500,
-};
+export function navigationFailure(): NotificationParamsTyped {
+  return {
+    type: 'error',
+    title: $t('router.navigationFailure.title'),
+    message: $t('router.navigationFailure.message'),
+    duration: 2500,
+  };
+}

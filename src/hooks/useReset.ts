@@ -1,6 +1,5 @@
 import type { Ref } from 'vue';
 import { cloneDeep } from 'lodash-es';
-import { ref } from 'vue';
 
 /**
  * 一个自定义 hook，返回一个响应式引用（`ref`）和一个重置函数，
@@ -20,8 +19,14 @@ export function useReset<T>(val: T): [Ref<T>, () => void] {
   const _val = cloneDeep(val); // 保持深拷贝的初始状态
   const res = ref<T>(val); // 使用深拷贝初始化 ref
 
+  // 重置为深拷贝的初始状态
   function reset() {
-    res.value = cloneDeep(_val); // 重置为深拷贝的初始状态
+    if (res.value !== null && typeof res.value === 'object') {
+      Object.assign(res.value, cloneDeep(_val));
+    }
+    else {
+      res.value = cloneDeep(_val);
+    }
   }
 
   return [res as Ref<T>, reset];

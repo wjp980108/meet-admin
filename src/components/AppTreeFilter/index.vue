@@ -2,11 +2,11 @@
 import type { TreeInstance } from 'element-plus';
 import type Node from 'element-plus/es/components/tree/src/model/node';
 import type { TreeOptionProps } from 'element-plus/es/components/tree/src/tree.type';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'AppTreeFilter' });
 
 const treeFilterProps = withDefaults(defineProps<Props>(), {
-  placeholder: '请输入关键字进行过滤',
   props: (): TreeOptionProps => ({
     children: 'children',
     label: 'label',
@@ -39,6 +39,8 @@ const model = defineModel({
   type: [Array, String, Number, Object],
   default: undefined,
 });
+
+const placeholder = computed(() => treeFilterProps.placeholder || $t('components.treeFilter.placeholder'));
 
 // 默认值选中节点
 const selected = computed(() => {
@@ -176,10 +178,10 @@ onMounted(() => {
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="toggleTreeNodes(true)">
-                  展开全部
+                  {{ $t('components.treeFilter.expand') }}
                 </el-dropdown-item>
                 <el-dropdown-item @click="toggleTreeNodes(false)">
-                  折叠全部
+                  {{ $t('components.treeFilter.packUp') }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </template>

@@ -1,7 +1,7 @@
 import { useReset } from '@/hooks/useReset';
 import { router } from '@/router';
 import { staticRoutes } from '@/router/routes.static';
-import { useUserStore } from '@/stores';
+import { useTabStore, useUserStore } from '@/stores';
 import { createMenus, createRoutes, generateCacheRoutes, getBreadcrumbsByRoute } from '@/stores/route/method';
 
 interface RoutesStatus {
@@ -27,6 +27,8 @@ export const useRouteStore = defineStore('route-store', () => {
   });
 
   const userStore = useUserStore();
+  const tabStore = useTabStore();
+
   const initRouteInfo = async () => {
     try {
       // 获取用户信息
@@ -62,6 +64,9 @@ export const useRouteStore = defineStore('route-store', () => {
 
     // 获取需要缓存的路由名称
     state.value.cacheRoutes = generateCacheRoutes(rowRoutes);
+
+    // 初始国际化标签
+    tabStore.tabLocale();
 
     state.value.isInitAuthRoute = true;
   };
