@@ -9,7 +9,7 @@ interface UserSate {
 }
 
 export const useUserStore = defineStore('user-store', () => {
-  const [state] = useReset<UserSate>({
+  const [state, reset] = useReset<UserSate>({
     userInfo: {
       menus: [],
     },
@@ -19,11 +19,6 @@ export const useUserStore = defineStore('user-store', () => {
   // 设置 token
   const setToken = (token: string) => {
     state.value.accessToken = token;
-  };
-
-  // 清空 token
-  const removeToken = () => {
-    state.value.accessToken = '';
   };
 
   // 获取用户信息
@@ -36,8 +31,8 @@ export const useUserStore = defineStore('user-store', () => {
   return {
     ...toRefs(state.value),
     setToken,
-    removeToken,
     getUserInfo,
+    handleReset: reset,
   };
 }, {
   persist: {

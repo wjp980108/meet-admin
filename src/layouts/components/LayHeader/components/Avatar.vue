@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '@/stores';
+import { useTabStore, useUserStore } from '@/stores';
 import { renderIcon } from '@/utils';
 import { ElMessageBox } from 'element-plus';
 import { useI18n } from 'vue-i18n';
@@ -9,6 +9,7 @@ defineOptions({ name: 'Avatar' });
 const router = useRouter();
 const { t } = useI18n();
 const userStore = useUserStore();
+const tabStore = useTabStore();
 
 function handleSelect(val: string) {
   if (val === 'loginOut') {
@@ -16,9 +17,10 @@ function handleSelect(val: string) {
       confirmButtonText: t('confirm.confirm'),
       cancelButtonText: t('confirm.cancel'),
       type: 'warning',
-    }).then(() => {
-      userStore.removeToken();
-      router.push('/login');
+    }).then(async () => {
+      await router.push('/login');
+      userStore.handleReset();
+      tabStore.handleReset();
     });
   }
 }

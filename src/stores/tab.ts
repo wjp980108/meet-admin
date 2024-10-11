@@ -11,7 +11,7 @@ interface TabState {
 }
 
 export const useTabStore = defineStore('tab-store', () => {
-  const [state] = useReset<TabState>({
+  const [state, reset] = useReset<TabState>({
     tabs: [],
     currentTabPath: '',
   });
@@ -173,6 +173,7 @@ export const useTabStore = defineStore('tab-store', () => {
     closeLeftTabs,
     closeRightTabs,
     closeAllTabs,
+    handleReset: reset,
   };
 }, {
   persist: {

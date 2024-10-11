@@ -85,8 +85,8 @@ function createAxios<Data = any, T = AppAxios.ApiPromise<Data>>(axiosConfig: Axi
 
       // 登录过期
       if (data.code === 1) {
-        userStore.removeToken();
         await router.push('/login');
+        userStore.handleReset();
         ElMessage.error({
           message: data.message,
         });
