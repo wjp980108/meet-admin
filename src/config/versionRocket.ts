@@ -5,8 +5,8 @@ export default function () {
   const { VITE_APP_NAME, VITE_PUBLIC_PATH, MODE } = import.meta.env;
 
   checkVersion({
-    // 5分钟检测一次版本
-    pollingTime: 10000,
+    // 3分钟检测一次版本
+    pollingTime: 180000,
     // 版本号
     localPackageVersion: version,
     // 版本文件地址
