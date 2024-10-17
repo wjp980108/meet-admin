@@ -57,7 +57,7 @@ export default function createVitePlugins(env: any) {
       resolvers: [ElementPlusResolver()],
     }),
     VueI18nPlugin({
-      include: path.resolve(__dirname, '../../src/locales/**'),
+      include: path.resolve(__dirname, '../src/locales/**'),
     }),
     configCompressPlugin(env.VITE_COMPRESSION),
   ];
