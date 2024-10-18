@@ -138,7 +138,7 @@ onMounted(getTablePageList);
 </script>
 
 <template>
-  <app-flex class="table-box">
+  <app-flex vertical>
     <app-card>
       <app-form :cols="{ xs: 1, sm: 3, md: 3, lg: 3, xl: 3 }" :search="getTablePageList" :reset="reset">
         <app-form-item label="关键字">

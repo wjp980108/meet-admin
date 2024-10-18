@@ -171,7 +171,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <app-flex class="content-box">
+  <app-flex>
     <app-tree-filter
       v-model="params.deptIds" class="min-w-240" :data="departmentList" :props="{ label: 'name' }"
       check-strictly card multiple @change="getTablePageList"

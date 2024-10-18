@@ -38,17 +38,28 @@ watchEffect(() => {
           <LayHeader />
           <LayTabs />
         </el-header>
-        <el-scrollbar class="flex-box" wrap-class="flex-box" view-class="flex-box">
-          <el-main class="flex-box bg-[var(--el-bg-color-page)]" style="--el-main-padding: 16px">
+        <el-main class="bg-[var(--el-bg-color-page)]" style="--el-main-padding: 0">
+          <el-scrollbar
+            :wrap-style="{
+              'display': 'flex',
+              'flex-wrap': 'wrap',
+            }"
+            :view-style="{
+              'display': 'flex',
+              'flex': 'auto',
+              'overflow': 'hidden',
+              'flex-direction': 'column',
+            }"
+          >
             <router-view v-slot="{ Component, route }">
               <transition :name="transitionAnimation" mode="out-in" appear>
                 <keep-alive :include="routeStore.cacheRoutes">
-                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" />
+                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" class="main-content" />
                 </keep-alive>
               </transition>
             </router-view>
-          </el-main>
-        </el-scrollbar>
+          </el-scrollbar>
+        </el-main>
         <el-tooltip content="返回顶部" placement="top">
           <el-backtop target=".el-scrollbar .el-scrollbar__view" :bottom="120" />
         </el-tooltip>

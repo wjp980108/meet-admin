@@ -23,16 +23,11 @@ a {
   text-decoration: none;
 }
 
-.content-box, .table-box {
+.main-content {
   display: flex;
   flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
-  flex: 1 1 0;
-}
-
-.table-box {
-  flex-flow: column nowrap !important;
+  flex: 1 1 auto;
+  padding: 16px;
 }
 
 /* 进度条样式-s */
