@@ -30,5 +30,7 @@ declare namespace App {
     tabStyle: TabStyle
     // 水印
     watermark: boolean
+    // 页脚
+    footer: boolean
   }
 }

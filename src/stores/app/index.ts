@@ -28,6 +28,7 @@ function data(): App.AppState {
     isDark: false,
     tabStyle: 'dynamic',
     watermark: false,
+    footer: false,
   };
 }
 

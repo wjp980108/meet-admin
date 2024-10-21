@@ -116,6 +116,7 @@ systemSettings:
     simple: 朴素
   watermark: 水印
   isReset: 是否重置系统设置?
+  footer: 页脚
 tab:
   reload: 刷新
   close: 关闭

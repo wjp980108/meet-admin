@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LayFooter from '@/layouts/components/LayFooter.vue';
 import LayHeader from '@/layouts/components/LayHeader/index.vue';
 import LayMenu from '@/layouts/components/LayMenu/index.vue';
 import LayTabs from '@/layouts/components/LayTabs/index.vue';
@@ -14,6 +15,7 @@ const {
   loadFlag,
   watermark,
   isDark,
+  footer,
 } = storeToRefs(appStore);
 
 const watermarkConfig = reactive({
@@ -60,6 +62,7 @@ watchEffect(() => {
             </router-view>
           </el-scrollbar>
         </el-main>
+        <LayFooter v-if="footer" />
         <el-tooltip content="返回顶部" placement="top">
           <el-backtop target=".el-scrollbar .el-scrollbar__view" :bottom="120" />
         </el-tooltip>

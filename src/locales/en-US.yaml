@@ -116,6 +116,7 @@ systemSettings:
     simple: Simple
   watermark: Watermark
   isReset: Whether to reset system settings?
+  footer: Footer
 tab:
   reload: Refresh
   close: Close
