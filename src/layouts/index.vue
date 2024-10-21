@@ -4,6 +4,7 @@ import LayHeader from '@/layouts/components/LayHeader/index.vue';
 import LayMenu from '@/layouts/components/LayMenu/index.vue';
 import LayTabs from '@/layouts/components/LayTabs/index.vue';
 import { useAppStore, useRouteStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'Layout' });
 
@@ -42,6 +43,7 @@ watchEffect(() => {
         </el-header>
         <el-main class="bg-[var(--el-bg-color-page)]" style="--el-main-padding: 0">
           <el-scrollbar
+            class="main-scrollbar"
             :wrap-style="{
               'display': 'flex',
               'flex-wrap': 'wrap',
@@ -63,8 +65,8 @@ watchEffect(() => {
           </el-scrollbar>
         </el-main>
         <LayFooter v-if="footer" />
-        <el-tooltip content="返回顶部" placement="top">
-          <el-backtop target=".el-scrollbar .el-scrollbar__view" :bottom="120" />
+        <el-tooltip :content="$t('common.backToTop')" placement="top">
+          <el-backtop target=".main-scrollbar .el-scrollbar__wrap" />
         </el-tooltip>
       </el-container>
     </el-container>
