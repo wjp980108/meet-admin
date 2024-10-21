@@ -30,6 +30,7 @@ function data(): App.AppState {
     tabStyle: 'dynamic',
     watermark: false,
     footer: false,
+    buttonTip: false,
   };
 }
 

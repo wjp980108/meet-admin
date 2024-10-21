@@ -118,6 +118,7 @@ systemSettings:
   watermark: 水印
   isReset: 是否重置系统设置?
   footer: 页脚
+  buttonTip: 按钮提示
 tab:
   reload: 刷新
   close: 关闭

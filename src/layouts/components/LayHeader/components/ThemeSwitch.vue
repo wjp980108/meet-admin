@@ -6,6 +6,7 @@ import { $t, renderIcon } from '@/utils';
 defineOptions({ name: 'ThemeSwitch' });
 
 const appStore = useAppStore();
+const { buttonTip } = storeToRefs(appStore);
 
 const theme = computed(() => appStore.storeColorMode);
 
@@ -21,7 +22,7 @@ const themeList = [
 <template>
   <el-dropdown class="theme-switch" trigger="click" @command="setColorMode">
     <span>
-      <el-tooltip :content="$t(`theme.${appStore.storeColorMode}`)" placement="left">
+      <el-tooltip :content="$t(`theme.${appStore.storeColorMode}`)" placement="left" :disabled="!buttonTip">
         <div class="wrapper">
           <app-icon v-if="appStore.storeColorMode === 'light'" icon="icon-park-outline:sun-one" size="16" />
           <app-icon v-if="appStore.storeColorMode === 'dark'" icon="icon-park-outline:moon" />

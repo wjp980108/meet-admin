@@ -32,5 +32,7 @@ declare namespace App {
     watermark: boolean
     // 页脚
     footer: boolean
+    // 页脚
+    buttonTip: boolean
   }
 }

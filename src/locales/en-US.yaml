@@ -118,6 +118,7 @@ systemSettings:
   watermark: Watermark
   isReset: Whether to reset system settings?
   footer: Footer
+  buttonTip: Button tip
 tab:
   reload: Refresh
   close: Close

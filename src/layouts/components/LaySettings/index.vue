@@ -20,6 +20,7 @@ const {
   watermark,
   locale,
   footer,
+  buttonTip,
 } = storeToRefs(appStore);
 
 const showSetting = ref(false);
@@ -37,7 +38,7 @@ const { setColorMode, setMenuTheme } = useTheme();
 
 <template>
   <div class="app-setting">
-    <el-tooltip :content="$t('systemSettings.title')">
+    <el-tooltip :content="$t('systemSettings.title')" :disabled="!buttonTip">
       <div class="wrapper" @click="showSetting = true">
         <app-icon icon="icon-park-outline:setting" />
       </div>
@@ -126,6 +127,13 @@ const { setColorMode, setMenuTheme } = useTheme();
             {{ $t('systemSettings.footer') }}
             <el-switch
               v-model="footer" :active-text="$t('common.show')" :inactive-text="$t('common.hide')"
+              inline-prompt
+            />
+          </app-flex>
+          <app-flex justify="space-between" align="center">
+            {{ $t('systemSettings.buttonTip') }}
+            <el-switch
+              v-model="buttonTip" :active-text="$t('common.show')" :inactive-text="$t('common.hide')"
               inline-prompt
             />
           </app-flex>
