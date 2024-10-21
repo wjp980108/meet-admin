@@ -4,6 +4,7 @@ import { colorInfo, Constant } from '@/constants';
 import { useTheme } from '@/hooks';
 import { useEventBus } from '@/hooks/useEventBus';
 import { $t } from '@/utils';
+import dayjs from 'dayjs';
 import { ElMessageBox } from 'element-plus';
 import { cloneDeep } from 'lodash-es';
 import { useI18n } from 'vue-i18n';
@@ -73,6 +74,7 @@ export const useAppStore = defineStore('app-store', () => {
   function setLocale(lang: LocaleType) {
     locale.value = lang;
     state.locale = lang;
+    dayjs.locale(lang);
     emit(Constant.LOCALE_EVENT);
   }
 
