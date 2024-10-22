@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import logo from '@/assets/images/logo.svg';
-import SubMenu from '@/layouts/components/LayMenu/components/menu.vue';
+import SubMenu from '@/layouts/components/LayMenu/components/SubMenu.vue';
 import { useAppStore, useRouteStore } from '@/stores';
 
 defineOptions({ name: 'LayMenu' });
@@ -18,7 +18,7 @@ const name = import.meta.env.VITE_APP_NAME;
 
 <template>
   <el-aside :width="collapse ? '65px' : '210px'">
-    <div class="logo flex-center" @click="router.push('/')">
+    <div class="logo flex-center cursor-pointer" @click="router.push('/')">
       <el-image class="w-28" :src="logo" alt="Logo" />
       <span v-show="!collapse" class="logo-text">{{ name }}</span>
     </div>

@@ -27,14 +27,18 @@ function handleClickMenu(item: MenuItemRegistered) {
     <el-sub-menu v-if="menu.children" :index="menu.key">
       <template #title>
         <app-icon v-if="menu.icon" :icon="menu.icon" :size="20" />
-        <span class="truncate">{{ menu.label }}</span>
+        <app-text truncated :offset="-5" placement="top">
+          {{ menu.label }}
+        </app-text>
       </template>
       <SubMenu :menu-list="menu.children" />
     </el-sub-menu>
     <el-menu-item v-else :index="menu.key" @click="handleClickMenu">
       <app-icon v-if="menu.icon" :icon="menu.icon" :size="20" />
       <template #title>
-        <span class="truncate">{{ menu.label }}</span>
+        <app-text truncated :offset="-5" placement="top">
+          {{ menu.label }}
+        </app-text>
       </template>
     </el-menu-item>
   </template>
