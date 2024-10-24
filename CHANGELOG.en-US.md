@@ -8,7 +8,7 @@ _2024-10-24_
 
 - Modify the file path of [ SearchMenu ]
 - Modify wildcard route `name` to `not-found`
--Upgrade project dependencies
+- Upgrade project dependencies
 - Split and optimize the `vite.config.ts` file
 
 #### New feature
