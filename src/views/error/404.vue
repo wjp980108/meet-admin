@@ -12,175 +12,49 @@ function backToHome() {
 </script>
 
 <template>
-  <div class="wscn-http404-container">
-    <div class="wscn-http404">
-      <div class="pic-404">
-        <img alt="404" class="pic-404__parent" src="@/assets/images/404/404.png">
-        <img alt="404" class="left pic-404__child" src="@/assets/images/404/404_cloud.png">
-        <img alt="404" class="pic-404__child mid" src="@/assets/images/404/404_cloud.png">
-        <img alt="404" class="pic-404__child right" src="@/assets/images/404/404_cloud.png">
+  <div class="main-content">
+    <img alt="404" class="pic-404" src="@/assets/images/404-Error-amico.svg">
+    <div class="bullshit">
+      <div class="bullshit__oops">
+        {{ $t('page.404.title') }}
       </div>
-      <div class="bullshit">
-        <div class="bullshit__oops">
-          {{ $t('page.404.title') }}
-        </div>
-        <div class="bullshit__info">
-          {{ $t('page.404.subtitle') }}
-          <a style="color: #20a0ff" href="https://blog.wjp.plus" target="_blank">Meet you</a>
-        </div>
-        <div class="bullshit__headline">
-          {{ $t('page.404.content') }}
-        </div>
-        <div class="bullshit__info">
-          {{ $t('page.404.info') }}
-        </div>
-        <el-button type="primary" round @click="backToHome">
-          {{ $t('page.404.button') }}
-        </el-button>
+      <div class="bullshit__info">
+        {{ $t('page.404.subtitle') }}
+        <a style="color: #20a0ff" href="https://blog.wjp.plus" target="_blank">Meet you</a>
       </div>
+      <div class="bullshit__headline">
+        {{ $t('page.404.content') }}
+      </div>
+      <div class="bullshit__info">
+        {{ $t('page.404.info') }}
+      </div>
+      <el-button type="primary" round @click="backToHome">
+        {{ $t('page.404.button') }}
+      </el-button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.wscn-http404-container {
-  align-items: center;
-}
-
-.wscn-http404 {
-  position: relative;
-  height: 100%;
-  display: flex;
+.main-content {
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 0 50px;
-  overflow: hidden;
+  gap: 12px;
 
   .pic-404 {
-    position: relative;
-    float: left;
-    width: 600px;
-    overflow: hidden;
-
-    &__parent {
-      width: 100%;
-    }
-
-    &__child {
-      position: absolute;
-
-      &.left {
-        width: 80px;
-        top: 17px;
-        left: 220px;
-        opacity: 0;
-        animation-name: cloudLeft;
-        animation-duration: 2s;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
-        animation-delay: 1s;
-      }
-
-      &.mid {
-        width: 46px;
-        top: 10px;
-        left: 420px;
-        opacity: 0;
-        animation-name: cloudMid;
-        animation-duration: 2s;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
-        animation-delay: 1.2s;
-      }
-
-      &.right {
-        width: 62px;
-        top: 100px;
-        left: 500px;
-        opacity: 0;
-        animation-name: cloudRight;
-        animation-duration: 2s;
-        animation-timing-function: linear;
-        animation-fill-mode: forwards;
-        animation-delay: 1s;
-      }
-
-      @keyframes cloudLeft {
-        0% {
-          top: 17px;
-          left: 220px;
-          opacity: 0;
-        }
-        20% {
-          top: 33px;
-          left: 188px;
-          opacity: 1;
-        }
-        80% {
-          top: 81px;
-          left: 92px;
-          opacity: 1;
-        }
-        100% {
-          top: 97px;
-          left: 60px;
-          opacity: 0;
-        }
-      }
-      @keyframes cloudMid {
-        0% {
-          top: 10px;
-          left: 420px;
-          opacity: 0;
-        }
-        20% {
-          top: 40px;
-          left: 360px;
-          opacity: 1;
-        }
-        70% {
-          top: 130px;
-          left: 180px;
-          opacity: 1;
-        }
-        100% {
-          top: 160px;
-          left: 120px;
-          opacity: 0;
-        }
-      }
-      @keyframes cloudRight {
-        0% {
-          top: 100px;
-          left: 500px;
-          opacity: 0;
-        }
-        20% {
-          top: 120px;
-          left: 460px;
-          opacity: 1;
-        }
-        80% {
-          top: 180px;
-          left: 340px;
-          opacity: 1;
-        }
-        100% {
-          top: 200px;
-          left: 300px;
-          opacity: 0;
-        }
-      }
-    }
+    max-width: 500px;
+    width: 60%;
+    min-width: 255px;
+    opacity: 0;
+    animation-name: slideUpImage;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
   }
 
   .bullshit {
-    position: relative;
-    float: left;
     width: 300px;
-    padding: 30px 0;
-    overflow: hidden;
 
     &__oops {
       font-size: 32px;
@@ -227,6 +101,17 @@ function backToHome() {
         transform: translateY(0);
         opacity: 1;
       }
+    }
+  }
+
+  @keyframes slideUpImage {
+    0% {
+      transform: translateY(30px);  // 从下往上
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);  // 正常位置
+      opacity: 1;
     }
   }
 }
