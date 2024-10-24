@@ -19,7 +19,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: '404',
+    name: 'not-found',
     meta: {
       title: '404',
       isWithoutTab: true,
