@@ -149,28 +149,12 @@ function handleTreeCheck() {
 
 // 复用模板
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate();
-
-// 检查文字是否溢出的函数
-function isTextOverflow(el: HTMLElement) {
-  if (!el)
-    return false;
-  return el.scrollWidth > el.offsetWidth;
-}
-
-// 计算属性来判断是否溢出
-const isOverflow = ref(false);
-onMounted(() => {
-  const treeNodeLabel = document.querySelector('.el-tree-node__label');
-  if (treeNodeLabel) {
-    isOverflow.value = isTextOverflow(treeNodeLabel as HTMLElement);
-  }
-});
 </script>
 
 <template>
   <div class="app-tree-filter flex-box">
     <DefineTemplate>
-      <app-flex class="flex-1" vertical>
+      <app-flex class="overflow-hidden" vertical>
         <app-flex :size="0" align="center">
           <el-input v-model="filterText" :placeholder clearable />
           <el-dropdown trigger="click">
@@ -187,7 +171,7 @@ onMounted(() => {
             </template>
           </el-dropdown>
         </app-flex>
-        <el-scrollbar view-class="flex-box">
+        <el-scrollbar>
           <el-tree
             ref="treeRef"
             :data="data"
@@ -206,19 +190,17 @@ onMounted(() => {
             @check="handleTreeCheck"
           >
             <template #default="scope">
-              <el-tooltip :content="scope.node.label" placement="right">
-                <el-text class="el-tree-node__label" truncated>
-                  <slot :row="scope">
-                    {{ scope.node.label }}
-                  </slot>
-                </el-text>
-              </el-tooltip>
+              <app-text class="el-tree-node__label" truncated>
+                <slot :row="scope">
+                  {{ scope.node.label }}
+                </slot>
+              </app-text>
             </template>
           </el-tree>
         </el-scrollbar>
       </app-flex>
     </DefineTemplate>
-    <el-card v-if="card" class="flex-box !overflow-unset" body-class="flex-box">
+    <el-card v-if="card" class="flex-box" body-class="flex-box">
       <ReuseTemplate />
     </el-card>
     <ReuseTemplate v-else />
