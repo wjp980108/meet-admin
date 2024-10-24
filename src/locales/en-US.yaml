@@ -17,6 +17,10 @@ common:
   saveLoading: Saving please wait...
   deleteLoading: Deleting please wait....
   updateLoading: Updating please wait....
+  backToTop: Back to top
+  confirm: Confirm
+  switch: Switch
+  close: Close
 page:
   login:
     title: Login
@@ -30,11 +34,11 @@ page:
     loginSuccessful: Login successful
     welcomeBack: Welcome back
   404:
-    title: UH OH! You're lost.
-    content: The page you are looking for does not exist.
-      How you got here is a mystery. But you can click the button below
-      to go back to the homepage.
-    home: Home
+    title: OOPS!
+    subtitle: All rights reserved
+    content: The webmaster said that you can not enter this page...
+    info: Please check that the URL you entered is correct, or click the button below to return to the homepage.
+    button: Back to home
 status:
   success: Success
 router:
@@ -57,6 +61,11 @@ components:
     placeholder: Please enter keywords to filter
     expand: Expand all
     packUp: Collapse all
+  searchMenu:
+    placeholder: Search menu
+    noData: No data yet
+    result: Search results
+    ctrl-k: Toggle search panel
 hooks:
   confirm:
     whether: Whether
@@ -116,6 +125,8 @@ systemSettings:
     simple: Simple
   watermark: Watermark
   isReset: Whether to reset system settings?
+  footer: Footer
+  buttonTip: Button tip
 tab:
   reload: Refresh
   close: Close

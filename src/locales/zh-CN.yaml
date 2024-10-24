@@ -17,6 +17,10 @@ common:
   saveLoading: 保存中，请稍等...
   deleteLoading: 删除中，请稍等...
   updateLoading: 更新中，请稍等...
+  backToTop: 返回顶部
+  confirm: 确认
+  switch: 切换
+  close: 关闭
 page:
   login:
     title: 登录
@@ -30,9 +34,11 @@ page:
     loginSuccessful: 登录成功
     welcomeBack: 欢迎回来
   404:
-    title: 哎呀！你迷路了。
-    content: 你正在寻找的页面不存在。你是如何来到这里的是一个谜。但是你可以点击下面的按钮返回到主页。
-    home: 首页
+    title: 哎呀！
+    subtitle: 版权所有
+    content: 站长说你不能进入这个页面...
+    info: 请检查您输入的网址是否正确，或点击下面的按钮返回首页。
+    button: 回到首页
 status:
   success: 成功
 router:
@@ -55,6 +61,11 @@ components:
     placeholder: 请输入关键字进行过滤
     expand: 展开全部
     packUp: 收起全部
+  searchMenu:
+    placeholder: 搜索菜单
+    noData: 暂无数据
+    result: 搜索结果
+    ctrl-k: 切换搜索面板
 hooks:
   confirm:
     whether: 是否
@@ -114,6 +125,8 @@ systemSettings:
     simple: 朴素
   watermark: 水印
   isReset: 是否重置系统设置?
+  footer: 页脚
+  buttonTip: 按钮提示
 tab:
   reload: 刷新
   close: 关闭

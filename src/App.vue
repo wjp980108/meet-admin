@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import initVersionRocket from '@/config/versionRocket';
 import { Constant, elLocale } from '@/constants';
 import { useEventBus, useTheme } from '@/hooks';
 import { useAppStore, useRouteStore, useTabStore } from '@/stores';
@@ -30,6 +31,9 @@ on(Constant.LOCALE_EVENT, async () => {
     tabStore.tabLocale();
   }
 });
+
+// 初始化版本检测
+initVersionRocket();
 </script>
 
 <template>

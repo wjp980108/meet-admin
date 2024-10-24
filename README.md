@@ -90,7 +90,9 @@ pnpm commit
 
 ```text
 Meet-Admin
+├─ .github                 # GitHub configuration file
 ├─ .husky                  # Husky configuration file
+├─ config                  # Vite configuration file
 ├─ public                  # Static resource files (this folder will not be packaged)
 ├─ src
 │  ├─ api                  # API interface management

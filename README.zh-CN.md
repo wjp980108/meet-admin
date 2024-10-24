@@ -90,7 +90,9 @@ pnpm commit
 
 ```text
 Meet-Admin
+├─ .github                 # GitHub 配置文件
 ├─ .husky                  # Husky 配置文件
+├─ build                   # Vite 配置文件
 ├─ public                  # 静态资源文件（该文件夹不会被打包）
 ├─ src
 │  ├─ api                  # API 接口管理

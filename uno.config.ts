@@ -17,7 +17,7 @@ export default defineConfig({
     'flex-center': 'flex justify-center items-center',
     'flex-x-center': 'flex justify-center',
     'flex-y-center': 'flex items-center',
-    'flex-box': 'flex flex-1 wh-full',
+    'flex-box': 'flex flex-1 w-full',
     // 快捷按键的样式
     'commands': 'h-22 w-22 m-r-5 flex-center b-rd-2 bg-[rgba(125,125,125,0.1)] text-10 color-#909399 shadow-commands',
   },

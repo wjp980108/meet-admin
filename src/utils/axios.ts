@@ -24,7 +24,7 @@ function createAxios<Data = any, T = AppAxios.ApiPromise<Data>>(axiosConfig: Axi
       return qs.stringify(filteredParams, { arrayFormat: 'repeat' });
     },
   };
-  if (import.meta.env.VITE_APP_ENV !== 'dev')
+  if (import.meta.env.MODE !== 'dev')
     serviceConfig.baseURL = import.meta.env.VITE_BASE_URL;
 
   // 创建 axios

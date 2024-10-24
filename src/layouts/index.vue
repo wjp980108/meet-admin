@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import LayFooter from '@/layouts/components/LayFooter.vue';
 import LayHeader from '@/layouts/components/LayHeader/index.vue';
 import LayMenu from '@/layouts/components/LayMenu/index.vue';
 import LayTabs from '@/layouts/components/LayTabs/index.vue';
 import { useAppStore, useRouteStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'Layout' });
 
@@ -14,6 +16,7 @@ const {
   loadFlag,
   watermark,
   isDark,
+  footer,
 } = storeToRefs(appStore);
 
 const watermarkConfig = reactive({
@@ -30,7 +33,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <el-watermark class="wh-full" :content="watermark ? watermarkConfig.content : ''" :font="watermarkConfig.font">
+  <el-watermark class="watermark wh-full" :content="watermark ? watermarkConfig.content : ''" :font="watermarkConfig.font">
     <el-container>
       <LayMenu />
       <el-container>
@@ -38,21 +41,32 @@ watchEffect(() => {
           <LayHeader />
           <LayTabs />
         </el-header>
-        <el-scrollbar class="flex-box" wrap-class="flex-box" view-class="flex-box">
-          <el-main class="flex-box bg-[var(--el-bg-color-page)]" style="--el-main-padding: 16px">
+        <el-main class="bg-[var(--el-bg-color-page)]" style="--el-main-padding: 0">
+          <el-scrollbar class="main-scrollbar">
             <router-view v-slot="{ Component, route }">
               <transition :name="transitionAnimation" mode="out-in" appear>
                 <keep-alive :include="routeStore.cacheRoutes">
-                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" />
+                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" class="p-16" />
                 </keep-alive>
               </transition>
             </router-view>
-          </el-main>
-        </el-scrollbar>
-        <el-tooltip content="返回顶部" placement="top">
-          <el-backtop target=".el-scrollbar .el-scrollbar__view" :bottom="120" />
+          </el-scrollbar>
+        </el-main>
+        <LayFooter v-if="footer" />
+        <el-tooltip :content="$t('common.backToTop')" placement="top">
+          <el-backtop target=".main-scrollbar .el-scrollbar__wrap" />
         </el-tooltip>
       </el-container>
     </el-container>
   </el-watermark>
 </template>
+
+<style scoped lang="scss">
+.main-scrollbar {
+  :deep(.el-scrollbar__view) {
+    &:has(.main-content) {
+      height: 100%;
+    }
+  }
+}
+</style>

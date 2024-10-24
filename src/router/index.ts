@@ -36,8 +36,8 @@ export async function installRouter(app: App) {
       tabStore.initTab();
 
       // 动态路由加载完回到根路由
-      if (to.name === '404') {
-        // 等待权限路由加载好了，回到之前的路由,否则404
+      if (to.name === 'not-found') {
+        // 等待权限路由加载好了，回到之前的路由
         next({
           path: to.fullPath,
           replace: true,

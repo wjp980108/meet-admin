@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus';
 import { login } from '@/api';
-import bg from '@/assets/login/bg.png';
-import illustration from '@/assets/login/illustration.svg';
-import logo from '@/assets/logo.svg';
+import bg from '@/assets/images/login/bg.png';
+import illustration from '@/assets/images/login/illustration.svg';
+import logo from '@/assets/images/logo.svg';
 import { Constant } from '@/constants';
 import Locale from '@/layouts/components/LayHeader/components/Locale.vue';
 import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
