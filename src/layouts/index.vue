@@ -33,7 +33,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <el-watermark class="wh-full" :content="watermark ? watermarkConfig.content : ''" :font="watermarkConfig.font">
+  <el-watermark class="watermark wh-full" :content="watermark ? watermarkConfig.content : ''" :font="watermarkConfig.font">
     <el-container>
       <LayMenu />
       <el-container>
@@ -42,23 +42,11 @@ watchEffect(() => {
           <LayTabs />
         </el-header>
         <el-main class="bg-[var(--el-bg-color-page)]" style="--el-main-padding: 0">
-          <el-scrollbar
-            class="main-scrollbar"
-            :wrap-style="{
-              'display': 'flex',
-              'flex-wrap': 'wrap',
-            }"
-            :view-style="{
-              'display': 'flex',
-              'flex': 'auto',
-              'overflow': 'hidden',
-              'flex-direction': 'column',
-            }"
-          >
+          <el-scrollbar class="main-scrollbar">
             <router-view v-slot="{ Component, route }">
               <transition :name="transitionAnimation" mode="out-in" appear>
                 <keep-alive :include="routeStore.cacheRoutes">
-                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" class="main-content" />
+                  <component :is="Component" v-if="loadFlag" :key="route.fullPath" class="p-16" />
                 </keep-alive>
               </transition>
             </router-view>
@@ -72,3 +60,13 @@ watchEffect(() => {
     </el-container>
   </el-watermark>
 </template>
+
+<style scoped lang="scss">
+.main-scrollbar {
+  :deep(.el-scrollbar__view) {
+    &:has(.main-content) {
+      height: 100%;
+    }
+  }
+}
+</style>

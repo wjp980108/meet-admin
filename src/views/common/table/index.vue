@@ -54,14 +54,16 @@ onMounted(getTableList);
 </script>
 
 <template>
-  <app-table title="表格" :data :columns :column-checks="columnChecks">
-    <template #header>
-      <el-button type="primary">
-        新增
-      </el-button>
-      <el-button type="danger">
-        删除
-      </el-button>
-    </template>
-  </app-table>
+  <div class="main-content">
+    <app-table title="表格" :data :columns :column-checks="columnChecks">
+      <template #header>
+        <el-button type="primary">
+          新增
+        </el-button>
+        <el-button type="danger">
+          删除
+        </el-button>
+      </template>
+    </app-table>
+  </div>
 </template>

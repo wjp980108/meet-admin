@@ -132,7 +132,7 @@ onMounted(getTableList);
 </script>
 
 <template>
-  <app-flex vertical>
+  <app-flex class="main-content" vertical>
     <app-card>
       <app-form :cols="{ xs: 1, sm: 3, md: 3, lg: 3, xl: 3 }" :search="getTableList" :reset="reset">
         <app-form-item label="关键字">

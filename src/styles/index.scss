@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow: hidden;
+}
+
 html,
 body,
 #app {
@@ -26,8 +30,7 @@ a {
 .main-content {
   display: flex;
   flex-flow: column nowrap;
-  flex: 1 1 auto;
-  padding: 16px;
+  height: 100%;
 }
 
 /* 进度条样式-s */

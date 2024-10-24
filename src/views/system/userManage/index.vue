@@ -12,7 +12,7 @@ const { columns, loading, params, getTablePageList, reset, data, columnChecks, p
   apiFnc: userList,
   apiParams: {
     keyWords: '',
-    deptIds: [],
+    deptIds: '',
     isEnabled: 'all',
   },
   columns: () => [
@@ -171,7 +171,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <app-flex>
+  <app-flex class="main-content">
     <app-tree-filter
       v-model="params.deptIds" class="min-w-240" :data="departmentList" :props="{ label: 'name' }"
       check-strictly card multiple @change="getTablePageList"
