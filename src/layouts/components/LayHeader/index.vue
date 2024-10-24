@@ -19,12 +19,15 @@ function handleSearchMenu() {
   showSearchMenu.value = true;
 }
 
-// 监听窗口大小, 自动隐藏面包屑
 const { width } = useWindowSize();
+// 监听窗口大小, 自动隐藏面包屑
 const isShowBreadcrumb = ref(true);
+// 监听窗口大小, 自动隐藏右侧按钮
+const isShowRight = ref(true);
 
 watch(width, useDebounceFn(() => {
   isShowBreadcrumb.value = width.value > 768;
+  isShowRight.value = width.value > 405;
 }, 100), {
   immediate: true,
 });
@@ -43,20 +46,22 @@ watch(width, useDebounceFn(() => {
     </app-flex>
     <!-- 右侧 -->
     <app-flex :size="5" align="center">
-      <el-tooltip :content="$t('tooltip.menuQuery')" :disabled="!buttonTip">
-        <div class="wrapper" @click="handleSearchMenu">
-          <app-icon icon="icon-park-outline:search" />
-        </div>
-      </el-tooltip>
-      <Locale />
-      <el-tooltip :content="$t('tooltip.toggleFullScreen')" :disabled="!buttonTip">
-        <div class="wrapper" @click="appStore.toggleFullScreen">
-          <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />
-          <app-icon v-else icon="icon-park-outline:full-screen-one" />
-        </div>
-      </el-tooltip>
-      <ThemeSwitch />
-      <LaySettings />
+      <template v-if="isShowRight">
+        <el-tooltip :content="$t('tooltip.menuQuery')" :disabled="!buttonTip">
+          <div class="wrapper" @click="handleSearchMenu">
+            <app-icon icon="icon-park-outline:search" />
+          </div>
+        </el-tooltip>
+        <Locale />
+        <el-tooltip :content="$t('tooltip.toggleFullScreen')" :disabled="!buttonTip">
+          <div class="wrapper" @click="appStore.toggleFullScreen">
+            <app-icon v-if="fullscreen" icon="icon-park-outline:off-screen-one" />
+            <app-icon v-else icon="icon-park-outline:full-screen-one" />
+          </div>
+        </el-tooltip>
+        <ThemeSwitch />
+        <LaySettings />
+      </template>
       <Avatar />
     </app-flex>
   </app-flex>
