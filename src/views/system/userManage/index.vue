@@ -12,7 +12,7 @@ const { columns, loading, params, getTablePageList, reset, data, columnChecks, p
   apiFnc: userList,
   apiParams: {
     keyWords: '',
-    deptIds: '',
+    deptIds: [],
     isEnabled: 'all',
   },
   columns: () => [
