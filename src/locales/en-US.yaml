@@ -18,6 +18,9 @@ common:
   deleteLoading: Deleting please wait....
   updateLoading: Updating please wait....
   backToTop: Back to top
+  confirm: Confirm
+  switch: Switch
+  close: Close
 page:
   login:
     title: Login
@@ -58,6 +61,11 @@ components:
     placeholder: Please enter keywords to filter
     expand: Expand all
     packUp: Collapse all
+  searchMenu:
+    placeholder: Search menu
+    noData: No data yet
+    result: Search results
+    ctrl-k: Toggle search panel
 hooks:
   confirm:
     whether: Whether

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouteStore } from '@/stores';
+import { $t } from '@/utils';
 
 defineOptions({ name: 'SearchMenu' });
 
@@ -151,7 +152,7 @@ registerShortcut();
       @closed="inputRef?.blur()"
     >
       <template #header>
-        <el-input ref="inputRef" v-model="menuName" placeholder="搜索菜单" clearable>
+        <el-input ref="inputRef" v-model="menuName" :placeholder="$t('components.searchMenu.placeholder')" clearable>
           <template #prefix>
             <app-icon icon="icon-park-outline:search" />
           </template>
@@ -159,7 +160,7 @@ registerShortcut();
       </template>
       <template v-if="getMenus.length">
         <div class="p-b-8 p-l-[var(--el-dialog-padding-primary)] text-[var(--el-color-primary)]">
-          搜索结果
+          {{ $t('components.searchMenu.result') }}
         </div>
         <el-scrollbar ref="scrollbarRef" view-class="p-(t-8 l-16 r-12 b-8)" max-height="400">
           <el-space style="width: 100%" :size="5" fill>
@@ -179,7 +180,7 @@ registerShortcut();
           </el-space>
         </el-scrollbar>
       </template>
-      <el-empty v-else description="暂无搜索结果" />
+      <el-empty v-else :description="$t('components.searchMenu.noData')" />
       <template #footer>
         <el-space class="w-full" :size="15">
           <div class="flex-y-center">
@@ -189,13 +190,13 @@ registerShortcut();
             <div class="commands">
               k
             </div>
-            <span class="text-14">打开/关闭搜索面板</span>
+            <span class="text-14">{{ $t('components.searchMenu.ctrl-k') }}</span>
           </div>
           <div class="flex-y-center">
             <div class="commands">
               <app-icon icon="fluent:arrow-enter-left-24-regular" />
             </div>
-            <span class="text-14">确认</span>
+            <span class="text-14">{{ $t('common.confirm') }}</span>
           </div>
           <div class="flex-y-center">
             <div class="commands">
@@ -204,13 +205,13 @@ registerShortcut();
             <div class="commands">
               <app-icon icon="icon-park-outline:arrow-up" />
             </div>
-            <span class="text-14">切换</span>
+            <span class="text-14">{{ $t('common.switch') }}</span>
           </div>
           <div class="flex-y-center">
             <div class="commands">
               esc
             </div>
-            <span class="text-14">关闭</span>
+            <span class="text-14">{{ $t('common.close') }}</span>
           </div>
         </el-space>
       </template>

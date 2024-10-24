@@ -18,6 +18,9 @@ common:
   deleteLoading: 删除中，请稍等...
   updateLoading: 更新中，请稍等...
   backToTop: 返回顶部
+  confirm: 确认
+  switch: 切换
+  close: 关闭
 page:
   login:
     title: 登录
@@ -58,6 +61,11 @@ components:
     placeholder: 请输入关键字进行过滤
     expand: 展开全部
     packUp: 收起全部
+  searchMenu:
+    placeholder: 搜索菜单
+    noData: 暂无数据
+    result: 搜索结果
+    ctrl-k: 切换搜索面板
 hooks:
   confirm:
     whether: 是否
