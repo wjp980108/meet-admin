@@ -143,6 +143,7 @@ export const useAppStore = defineStore('app-store', () => {
     // 只持久化真正的用户设置；collapse / loadFlag 是瞬态状态，持久化会导致刷新后布局错乱甚至白屏
     pick: [
       'locale',
+      'layout',
       'transitionAnimation',
       'themeColor',
       'size',

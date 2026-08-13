@@ -19,7 +19,7 @@ export interface IframeItem {
 
 /**
  * 已打开的 iframe 列表：iframe 节点一旦从文档中移除再插回就会重新加载，
- * 无法用 keep-alive 缓存，因此由 LayIframe 常驻渲染列表中的全部 iframe，用 v-show 切换显示
+ * 无法用 keep-alive 缓存，因此由布局层 Iframe 常驻渲染列表中的全部 iframe，用 v-show 切换显示
  */
 export const useIframeStore = defineStore('iframe-store', () => {
   const [state, reset] = useReset<{ iframes: IframeItem[] }>(() => ({

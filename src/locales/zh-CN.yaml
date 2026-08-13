@@ -150,6 +150,10 @@ systemSettings:
   pageConfig:
     title: 页面配置
     locale: 语言
+    layout: 布局模板
+    layoutOptions:
+      aside: 侧边菜单
+      top: 顶部菜单
     pageSwitching: 页面切换效果
     effect:
       fade: 淡入淡出

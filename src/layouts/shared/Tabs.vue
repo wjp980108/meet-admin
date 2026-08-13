@@ -7,7 +7,7 @@ import { useNotification } from '@/hooks/useNotification';
 import { useAppStore } from '@/stores/app';
 import { useTabStore } from '@/stores/tab';
 
-defineOptions({ name: 'LayTabs' });
+defineOptions({ name: 'LayoutTabs' });
 
 const { t } = useI18n();
 
@@ -175,9 +175,9 @@ const tabClass = computed(() => `${appStore.tabStyle}-tab`);
 </template>
 
 <style scoped lang="scss">
-@use 'cardTab';
-@use 'dynamicTab';
-@use 'simpleTab';
+@use 'tabs-card';
+@use 'tabs-dynamic';
+@use 'tabs-simple';
 
 .tabs-box {
   // 虚拟触发时 el-dropdown 仅作为弹层容器，其触发元素无需显示；

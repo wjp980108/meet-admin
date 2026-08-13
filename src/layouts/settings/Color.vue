@@ -3,7 +3,7 @@ import type { ThemeColorKey } from '@/config/settings.ts';
 import { defaultThemeColor, predefineColors } from '@/config/settings.ts';
 import { useAppStore } from '@/stores/app';
 
-defineOptions({ name: 'ColorSettings' });
+defineOptions({ name: 'LayoutColorSettings' });
 
 const { t } = useI18n();
 

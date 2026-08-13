@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { DefaultSettings } from '@/config/settings.ts';
 import { localeList } from '@/constants/locale.ts';
-import ColorSettings from '@/layouts/components/LaySettings/components/Color.vue';
+import ColorSettings from '@/layouts/settings/Color.vue';
+import { layoutTemplates } from '@/layouts/template';
 import { useAppStore } from '@/stores/app';
 import { downloadFile } from '@/utils/download';
 
-defineOptions({ name: 'LaySettings' });
+defineOptions({ name: 'LayoutSettings' });
 
 const { t } = useI18n();
 
@@ -21,6 +22,7 @@ const {
   watermark,
   locale,
   footer,
+  layout,
   themeColor,
   colorMode,
 } = storeToRefs(appStore);
@@ -38,13 +40,20 @@ const colorModeOptions = [
   { label: 'auto', value: 'auto', icon: 'icon-park-outline:laptop-computer' },
 ];
 
-const layoutOptions = ['default', 'large', 'small'];
+const sizeOptions = ['default', 'large', 'small'];
+const templateOptions = computed(() => Object.entries(layoutTemplates).map(([value, template]) => ({
+  value,
+  label: t(template.labelKey),
+})));
+
+const activeTemplate = computed(() => layoutTemplates[layout.value]);
 
 // 下载当前配置为 defaultSettings.json
 function handleDownload() {
   const config: DefaultSettings = {
     colorMode: colorMode.value,
     locale: locale.value,
+    layout: layout.value,
     size: size.value,
     transitionAnimation: transitionAnimation.value,
     themeColor: themeColor.value,
@@ -82,7 +91,7 @@ function handleReset() {
     <app-drawer v-model="showSetting" :title="t('systemSettings.title')" size="350" close-on-click-modal>
       <!-- 布局样式 -->
       <el-divider>{{ t('systemSettings.layout.title') }}</el-divider>
-      <el-segmented v-model="size" :options="layoutOptions" block>
+      <el-segmented v-model="size" :options="sizeOptions" block>
         <template #default="{ item }">
           {{ t(`systemSettings.layout.${item}`) }}
         </template>
@@ -99,7 +108,7 @@ function handleReset() {
           </template>
         </el-segmented>
         <!-- 侧边栏反转颜色 -->
-        <app-flex align="center">
+        <app-flex v-if="activeTemplate.supportsAsideInverted" align="center">
           <app-flex :size="0" align="center">
             {{ t('systemSettings.themeMode.sidebar') }}
             <app-help-info :content="t('systemSettings.themeMode.sidebarHelpInfo')" />
@@ -118,6 +127,10 @@ function handleReset() {
           <el-select v-model="locale" class="!w-155">
             <el-option v-for="item of localeList" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.pageConfig.layout') }}
+          <el-segmented v-model="layout" :options="templateOptions" />
         </app-flex>
         <app-flex justify="space-between" align="center">
           {{ t('systemSettings.pageConfig.pageSwitching') }}

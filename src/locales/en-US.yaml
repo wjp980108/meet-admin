@@ -150,6 +150,10 @@ systemSettings:
   pageConfig:
     title: Page configuration
     locale: Locale
+    layout: Layout template
+    layoutOptions:
+      aside: Sidebar
+      top: Top bar
     pageSwitching: Page switching effect
     effect:
       fade: Fade in and out

@@ -4,8 +4,13 @@ import type { RouteRecordRaw } from 'vue-router';
 import { navigationFailure } from '@/constants/router';
 import { useNotification } from '@/hooks/useNotification';
 
-defineOptions({ name: 'SubMenu' });
-defineProps<{ menuList: RouteRecordRaw[] }>();
+defineOptions({ name: 'LayoutMenuTree' });
+withDefaults(defineProps<{
+  menuList: RouteRecordRaw[];
+  mode?: 'aside' | 'top';
+}>(), {
+  mode: 'aside',
+});
 
 const router = useRouter();
 const route = useRoute();
@@ -25,16 +30,16 @@ function handleClickMenu(item: MenuItemRegistered) {
 
 <template>
   <template v-for="menu of menuList" :key="menu.path">
-    <el-sub-menu v-if="menu.children?.length" :index="menu.path">
+    <el-sub-menu v-if="menu.children?.length" :index="menu.path" :class="{ 'aside-menu': mode === 'aside' }">
       <template #title>
         <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" :size="20" />
         <app-text class="color-unset">
           {{ menu.meta!.title }}
         </app-text>
       </template>
-      <SubMenu :menu-list="menu.children" />
+      <MenuTree :menu-list="menu.children" :mode="mode" />
     </el-sub-menu>
-    <el-menu-item v-else :index="menu.path" @click="handleClickMenu">
+    <el-menu-item v-else :index="menu.path" :class="{ 'aside-menu': mode === 'aside' }" @click="handleClickMenu">
       <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" :size="20" />
       <template #title>
         <app-text class="color-unset">
@@ -46,7 +51,7 @@ function handleClickMenu(item: MenuItemRegistered) {
 </template>
 
 <style scoped lang="scss">
-.el-sub-menu {
+.aside-menu.el-sub-menu {
   :deep(.el-sub-menu__title) {
     &:hover {
       color: var(--el-menu-hover-text-color) !important;
@@ -55,7 +60,7 @@ function handleClickMenu(item: MenuItemRegistered) {
   }
 }
 
-.el-menu-item {
+.aside-menu.el-menu-item {
   &:hover {
     color: var(--el-menu-hover-text-color);
   }

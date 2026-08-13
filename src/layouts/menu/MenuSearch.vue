@@ -2,7 +2,7 @@
 import { pinyin } from 'pinyin-pro';
 import { useRouteStore } from '@/stores/route';
 
-defineOptions({ name: 'SearchMenu' });
+defineOptions({ name: 'LayoutMenuSearch' });
 
 const { t } = useI18n();
 

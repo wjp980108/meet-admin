@@ -3,7 +3,7 @@ import { useAppStore } from '@/stores/app';
 import { useIframeStore } from '@/stores/iframe';
 import { useTabStore } from '@/stores/tab';
 
-defineOptions({ name: 'LayIframe' });
+defineOptions({ name: 'LayoutIframe' });
 
 const route = useRoute();
 

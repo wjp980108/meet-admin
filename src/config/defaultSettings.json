@@ -1,6 +1,7 @@
 {
   "colorMode": "auto",
   "locale": "zh-CN",
+  "layout": "aside",
   "size": "default",
   "transitionAnimation": "fade-slide",
   "themeColor": {

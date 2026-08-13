@@ -3,7 +3,7 @@ import type { BasicColorSchema } from '@vueuse/core';
 import { renderIcon } from '@/components';
 import { useAppStore } from '@/stores/app';
 
-defineOptions({ name: 'ThemeSwitch' });
+defineOptions({ name: 'LayoutThemeSwitch' });
 
 const { t } = useI18n();
 
