@@ -136,6 +136,10 @@ theme:
   reset: 颜色已重置为
 systemSettings:
   title: 系统设置
+  tabs:
+    appearance: 外观
+    layout: 布局
+    general: 通用
   layout:
     title: 布局样式
     default: 默认

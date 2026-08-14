@@ -136,6 +136,10 @@ theme:
   reset: ' has been reset to'
 systemSettings:
   title: System settings
+  tabs:
+    appearance: Appearance
+    layout: Layout
+    general: General
   layout:
     title: Layout style
     default: Default

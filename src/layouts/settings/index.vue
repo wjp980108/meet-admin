@@ -12,6 +12,7 @@ defineOptions({ name: 'LayoutSettings' });
 const { t } = useI18n();
 
 const appStore = useAppStore();
+const activeTab = ref('appearance');
 
 const {
   size,
@@ -40,6 +41,11 @@ const colorModeOptions = [
   { label: 'auto', value: 'auto', icon: 'icon-park-outline:laptop-computer' },
 ];
 
+const settingTabOptions = computed(() => [
+  { label: t('systemSettings.tabs.appearance'), value: 'appearance' },
+  { label: t('systemSettings.tabs.layout'), value: 'layout' },
+  { label: t('systemSettings.tabs.general'), value: 'general' },
+]);
 const sizeOptions = ['default', 'large', 'small'];
 const templateOptions = computed(() => Object.entries(layoutTemplates).map(([value, template]) => ({
   value: value as LayoutTemplate,
@@ -85,117 +91,108 @@ function handleReset() {
 
 <template>
   <app-drawer v-model="settingPanelShow" :title="t('systemSettings.title')" size="350" close-on-click-modal>
-    <!-- 布局样式 -->
-    <el-divider>{{ t('systemSettings.layout.title') }}</el-divider>
-    <el-segmented v-model="size" :options="sizeOptions" block>
-      <template #default="{ item }">
-        {{ t(`systemSettings.layout.${item}`) }}
-      </template>
-    </el-segmented>
-    <!-- 主题模式 -->
-    <el-divider>{{ t('systemSettings.themeMode.title') }}</el-divider>
-    <app-flex vertical>
-      <!-- 切换主题 -->
-      <el-segmented v-model="colorModeProxy" :options="colorModeOptions" block>
-        <template #default="{ item }">
-          <app-flex justify="center">
-            <app-icon :icon="(item as any).icon" />
+    <el-segmented v-model="activeTab" :options="settingTabOptions" block />
+    <div v-if="activeTab === 'appearance'">
+      <el-divider>{{ t('systemSettings.themeMode.title') }}</el-divider>
+      <app-flex vertical>
+        <el-segmented v-model="colorModeProxy" :options="colorModeOptions" block>
+          <template #default="{ item }">
+            <app-flex justify="center">
+              <app-icon :icon="(item as any).icon" />
+            </app-flex>
+          </template>
+        </el-segmented>
+        <app-flex v-if="activeTemplate.supportsAsideInverted" align="center">
+          <app-flex :size="0" align="center">
+            {{ t('systemSettings.themeMode.sidebar') }}
+            <app-help-info :content="t('systemSettings.themeMode.sidebarHelpInfo')" />
           </app-flex>
+          <el-switch v-model="asideInverted" />
+        </app-flex>
+      </app-flex>
+      <el-divider>{{ t('systemSettings.themeColor.title') }}</el-divider>
+      <ColorSettings />
+    </div>
+
+    <div v-else-if="activeTab === 'layout'">
+      <el-divider>{{ t('systemSettings.layout.title') }}</el-divider>
+      <el-segmented v-model="size" :options="sizeOptions" block>
+        <template #default="{ item }">
+          {{ t(`systemSettings.layout.${item}`) }}
         </template>
       </el-segmented>
-      <!-- 侧边栏反转颜色 -->
-      <app-flex v-if="activeTemplate.supportsAsideInverted" align="center">
-        <app-flex :size="0" align="center">
-          {{ t('systemSettings.themeMode.sidebar') }}
-          <app-help-info :content="t('systemSettings.themeMode.sidebarHelpInfo')" />
-        </app-flex>
-        <el-switch v-model="asideInverted" />
-      </app-flex>
-    </app-flex>
-    <!-- 主题颜色 -->
-    <el-divider>{{ t('systemSettings.themeColor.title') }}</el-divider>
-    <ColorSettings />
-    <!-- 布局模板 -->
-    <el-divider>{{ t('systemSettings.pageConfig.layout') }}</el-divider>
-    <div
-      :aria-label="t('systemSettings.pageConfig.layout')" class="layout-template-options"
-      role="group"
-    >
-      <button
-        v-for="option in templateOptions"
-        :key="option.value"
-        :aria-pressed="layout === option.value"
-        :class="{ 'is-active': layout === option.value }"
-        class="layout-template-option"
-        type="button"
-        @click="layout = option.value"
+      <el-divider>{{ t('systemSettings.pageConfig.layout') }}</el-divider>
+      <div
+        :aria-label="t('systemSettings.pageConfig.layout')" class="layout-template-options"
+        role="group"
       >
-        <span :class="`is-${option.value}`" aria-hidden="true" class="layout-template-preview">
-          <span class="layout-template-preview__topbar" />
-          <span v-if="option.value === 'aside'" class="layout-template-preview__sidebar" />
-          <span class="layout-template-preview__content" />
-        </span>
-        <span class="layout-template-option__label">{{ option.label }}</span>
-      </button>
+        <button
+          v-for="option in templateOptions"
+          :key="option.value"
+          :aria-pressed="layout === option.value"
+          :class="{ 'is-active': layout === option.value }"
+          class="layout-template-option"
+          type="button"
+          @click="layout = option.value"
+        >
+          <span :class="`is-${option.value}`" aria-hidden="true" class="layout-template-preview">
+            <span class="layout-template-preview__topbar" />
+            <span v-if="option.value === 'aside'" class="layout-template-preview__sidebar" />
+            <span class="layout-template-preview__content" />
+          </span>
+          <span class="layout-template-option__label">{{ option.label }}</span>
+        </button>
+      </div>
     </div>
-    <!-- 页面设置 -->
-    <el-divider>{{ t('systemSettings.pageConfig.title') }}</el-divider>
-    <app-flex vertical>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.pageConfig.locale') }}
-        <el-select v-model="locale" class="!w-155">
-          <el-option v-for="item of localeList" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
+
+    <div v-else>
+      <el-divider>{{ t('systemSettings.tabs.general') }}</el-divider>
+      <app-flex vertical>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.pageConfig.locale') }}
+          <el-select v-model="locale" class="!w-155">
+            <el-option v-for="item of localeList" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </app-flex>
+        <app-flex align="center" justify="space-between">
+          {{ t('systemSettings.pageConfig.pageSwitching') }}
+          <el-select v-model="transitionAnimation" class="!w-155">
+            <el-option :label="t('systemSettings.pageConfig.effect.fade')" value="fade" />
+            <el-option :label="t('systemSettings.pageConfig.effect.fade-slide')" value="fade-slide" />
+            <el-option :label="t('systemSettings.pageConfig.effect.fade-bottom')" value="fade-bottom" />
+            <el-option :label="t('systemSettings.pageConfig.effect.fade-scale')" value="fade-scale" />
+            <el-option :label="t('systemSettings.pageConfig.effect.zoom-fade')" value="zoom-fade" />
+            <el-option :label="t('systemSettings.pageConfig.effect.zoom-out')" value="zoom-out" />
+            <el-option :label="t('systemSettings.pageConfig.effect.no')" value="none" />
+          </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.breadcrumbs.title') }}
+          <el-switch v-model="breadcrumbShow" />
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.breadcrumbs.icon') }}
+          <el-switch v-model="breadcrumbIconShow" />
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.tabStyle.title') }}
+          <el-select v-model="tabStyle" class="!w-155">
+            <el-option :label="t('systemSettings.tabStyle.dynamic')" value="dynamic" />
+            <el-option :label="t('systemSettings.tabStyle.card')" value="card" />
+            <el-option :label="t('systemSettings.tabStyle.simple')" value="simple" />
+          </el-select>
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.watermark') }}
+          <el-switch v-model="watermark" />
+        </app-flex>
+        <app-flex justify="space-between" align="center">
+          {{ t('systemSettings.footer') }}
+          <el-switch v-model="footer" />
+        </app-flex>
       </app-flex>
-      <app-flex align="center" justify="space-between">
-        {{ t('systemSettings.pageConfig.pageSwitching') }}
-        <el-select v-model="transitionAnimation" class="!w-155">
-          <el-option :label="t('systemSettings.pageConfig.effect.fade')" value="fade" />
-          <el-option :label="t('systemSettings.pageConfig.effect.fade-slide')" value="fade-slide" />
-          <el-option :label="t('systemSettings.pageConfig.effect.fade-bottom')" value="fade-bottom" />
-          <el-option :label="t('systemSettings.pageConfig.effect.fade-scale')" value="fade-scale" />
-          <el-option :label="t('systemSettings.pageConfig.effect.zoom-fade')" value="zoom-fade" />
-          <el-option :label="t('systemSettings.pageConfig.effect.zoom-out')" value="zoom-out" />
-          <el-option :label="t('systemSettings.pageConfig.effect.no')" value="none" />
-        </el-select>
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.breadcrumbs.title') }}
-        <el-switch
-          v-model="breadcrumbShow" :active-text="t('common.show')" :inactive-text="t('common.hide')"
-          inline-prompt
-        />
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.breadcrumbs.icon') }}
-        <el-switch
-          v-model="breadcrumbIconShow" :active-text="t('common.show')" :inactive-text="t('common.hide')"
-          inline-prompt
-        />
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.tabStyle.title') }}
-        <el-select v-model="tabStyle" class="!w-155">
-          <el-option :label="t('systemSettings.tabStyle.dynamic')" value="dynamic" />
-          <el-option :label="t('systemSettings.tabStyle.card')" value="card" />
-          <el-option :label="t('systemSettings.tabStyle.simple')" value="simple" />
-        </el-select>
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.watermark') }}
-        <el-switch
-          v-model="watermark" :active-text="t('common.show')" :inactive-text="t('common.hide')"
-          inline-prompt
-        />
-      </app-flex>
-      <app-flex justify="space-between" align="center">
-        {{ t('systemSettings.footer') }}
-        <el-switch
-          v-model="footer" :active-text="t('common.show')" :inactive-text="t('common.hide')"
-          inline-prompt
-        />
-      </app-flex>
-    </app-flex>
+    </div>
+
     <template #footer>
       <el-button type="primary" @click="handleDownload">
         {{ t('systemSettings.download') }}
