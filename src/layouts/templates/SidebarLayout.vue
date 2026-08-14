@@ -39,8 +39,9 @@ watchEffect(() => {
         <span v-show="!collapse" class="logo-text">{{ name }}</span>
       </div>
       <el-scrollbar>
-        <BaseMenu class="!b-r-0" :collapse unique-opened />
+        <BaseMenu :collapse unique-opened />
       </el-scrollbar>
+      <!-- 折叠按钮 -->
       <div class="aside-toggle-bar" @click="collapse = !collapse">
         <div class="aside-toggle-bar-top" />
         <div class="aside-toggle-bar-bottom" />
@@ -90,16 +91,43 @@ watchEffect(() => {
     height: calc(100vh - 55px);
 
     :deep(.el-menu) {
-      width: 100%;
-      --el-menu-item-height: 50px;
-      --el-menu-item-font-size: var(--el-font-size-medium);
+      border-right: 0;
 
-      .el-text {
-        --el-text-font-size: var(--el-font-size-medium);
+      .el-sub-menu {
+        .el-sub-menu__title {
+          &:hover {
+            // 反转菜单
+            color: var(--el-menu-hover-text-color);
+            background-color: transparent;
+          }
+        }
+      }
+
+      .el-menu-item {
+        &:hover {
+          // 反转菜单
+          color: var(--el-menu-hover-text-color);
+        }
+
+        &.is-active {
+          color: var(--el-menu-active-color);
+          background-color: var(--el-menu-active-bg-color);
+
+          &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+            content: '';
+            background-color: var(--el-color-primary);
+          }
+        }
       }
     }
   }
 
+  // 折叠按钮
   .aside-toggle-bar {
     cursor: pointer;
     height: 72px;
@@ -141,14 +169,15 @@ watchEffect(() => {
     }
   }
 
+  // 折叠
   &:has(.el-menu--collapse) {
     :deep(.is-active) {
       .el-sub-menu__title {
-        color: var(--el-color-white) !important;
-        background-color: var(--el-color-primary-light-2) !important;
+        color: var(--el-menu-hover-text-color);
       }
     }
 
+    // 折叠按钮
     .aside-toggle-bar:hover {
       .aside-toggle-bar-top {
         transform: rotate(-12deg) scale(1.15) translateY(-2px);

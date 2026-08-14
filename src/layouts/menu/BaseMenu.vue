@@ -4,7 +4,7 @@ import { useRouteStore } from '@/stores/route';
 
 defineOptions({ name: 'BaseMenu' });
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   mode?: 'vertical' | 'horizontal';
   collapse?: boolean;
   uniqueOpened?: boolean;
@@ -23,8 +23,6 @@ const { menus } = storeToRefs(routeStore);
 const defaultActive = computed<string>(() =>
   route.meta?.activeMenu ? route.meta.activeMenu : route.path,
 );
-
-const menuTreeMode = computed(() => props.mode === 'horizontal' ? 'top' : 'aside');
 </script>
 
 <template>
@@ -36,6 +34,6 @@ const menuTreeMode = computed(() => props.mode === 'horizontal' ? 'top' : 'aside
     :unique-opened="uniqueOpened"
     :ellipsis="mode === 'horizontal' ? ellipsis : undefined"
   >
-    <MenuTree :menu-list="menus" :mode="menuTreeMode" />
+    <MenuTree v-for="menu of menus" :key="menu.path" :menu="menu" />
   </el-menu>
 </template>

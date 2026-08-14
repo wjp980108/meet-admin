@@ -24,9 +24,7 @@ const isCompact = computed(() => width.value <= 405);
           <el-image class="w-36" :src="logo" alt="Logo" />
           <span class="ml-[var(--spacing-sm)] whitespace-nowrap text-20px font-bold">{{ name }}</span>
         </div>
-        <div class="top-menu-wrap">
-          <BaseMenu class="top-menu" mode="horizontal" />
-        </div>
+        <BaseMenu class="top-menu" mode="horizontal" />
         <HeaderActions :compact="isCompact" />
       </div>
       <!-- 页签 -->
@@ -37,39 +35,27 @@ const isCompact = computed(() => width.value <= 405);
 </template>
 
 <style scoped lang="scss">
-.top-logo {
-  height: 38px;
-  margin-right: var(--spacing-base);
-}
-
-.top-menu-wrap {
-  flex: 1;
-  height: 38px;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-}
-
 .topbar {
   display: flex;
   align-items: center;
-}
 
-.top-menu {
-  width: fit-content;
-  max-width: 100%;
-  border-bottom: 0;
-  --el-menu-bg-color: transparent;
-  --el-menu-item-height: 38px;
-  --el-menu-item-font-size: var(--el-font-size-medium);
-  --el-menu-text-color: var(--el-text-color-primary);
-  --el-menu-hover-text-color: var(--el-color-primary);
-  --el-menu-active-color: var(--el-color-primary);
-  --el-menu-hover-bg-color: transparent;
+  .top-logo {
+    height: 38px;
+    margin-right: var(--spacing-base);
+  }
 
-  :deep(.el-sub-menu__title),
-  :deep(.el-menu-item) {
-    padding: 0 var(--spacing-base);
+  .top-menu {
+    flex: 1;
+    min-width: 0;
+    border-bottom: 0;
+    --el-menu-horizontal-height: 38px;
+    --el-menu-item-height: 38px;
+    //--el-menu-hover-bg-color: transparent;
+
+    :deep(.el-sub-menu__title),
+    :deep(.el-menu-item) {
+      padding: 0 var(--spacing-base);
+    }
   }
 }
 </style>

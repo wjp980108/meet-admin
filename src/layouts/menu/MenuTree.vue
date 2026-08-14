@@ -5,12 +5,9 @@ import { navigationFailure } from '@/constants/router';
 import { useNotification } from '@/hooks/useNotification';
 
 defineOptions({ name: 'LayoutMenuTree' });
-withDefaults(defineProps<{
-  menuList: RouteRecordRaw[];
-  mode?: 'aside' | 'top';
-}>(), {
-  mode: 'aside',
-});
+defineProps<{
+  menu: RouteRecordRaw;
+}>();
 
 const router = useRouter();
 const route = useRoute();
@@ -29,55 +26,27 @@ function handleClickMenu(item: MenuItemRegistered) {
 </script>
 
 <template>
-  <template v-for="menu of menuList" :key="menu.path">
-    <el-sub-menu v-if="menu.children?.length" :index="menu.path" :class="{ 'aside-menu': mode === 'aside' }">
-      <template #title>
-        <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" :size="20" />
-        <app-text class="color-unset">
-          {{ menu.meta!.title }}
-        </app-text>
-      </template>
-      <MenuTree :menu-list="menu.children" :mode="mode" />
-    </el-sub-menu>
-    <el-menu-item v-else :index="menu.path" :class="{ 'aside-menu': mode === 'aside' }" @click="handleClickMenu">
-      <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" :size="20" />
-      <template #title>
-        <app-text class="color-unset">
-          {{ menu.meta!.title }}
-        </app-text>
-      </template>
-    </el-menu-item>
-  </template>
+  <el-sub-menu v-if="menu.children?.length" :index="menu.path">
+    <template #title>
+      <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" />
+      <app-text class="color-unset">
+        {{ menu.meta!.title }}
+      </app-text>
+    </template>
+    <MenuTree v-for="child of menu.children" :key="child.path" :menu="child" />
+  </el-sub-menu>
+  <el-menu-item v-else :index="menu.path" @click="handleClickMenu">
+    <app-icon v-if="menu.meta?.icon" :icon="menu.meta.icon" />
+    <template #title>
+      <app-text class="color-unset">
+        {{ menu.meta!.title }}
+      </app-text>
+    </template>
+  </el-menu-item>
 </template>
 
 <style scoped lang="scss">
-.aside-menu.el-sub-menu {
-  :deep(.el-sub-menu__title) {
-    &:hover {
-      color: var(--el-menu-hover-text-color) !important;
-      background-color: transparent !important;
-    }
-  }
-}
-
-.aside-menu.el-menu-item {
-  &:hover {
-    color: var(--el-menu-hover-text-color);
-  }
-
-  &.is-active {
-    color: var(--el-menu-active-color);
-    background-color: var(--el-menu-active-bg-color);
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 4px;
-      content: '';
-      background-color: var(--el-color-primary);
-    }
-  }
+:deep(.el-text) {
+  --el-text-font-size: var(--el-font-size-medium);
 }
 </style>
