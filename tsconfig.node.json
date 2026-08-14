@@ -5,6 +5,7 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "types": ["node"],
+    "allowImportingTsExtensions": true,
     "noEmit": true
   },
   "include": [

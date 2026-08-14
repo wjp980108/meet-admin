@@ -2,7 +2,7 @@
 import dayjs from 'dayjs';
 import { timeFormat } from '@/utils/date';
 
-defineOptions({ name: 'Notification' });
+defineOptions({ name: 'LayoutNotification' });
 
 const { t } = useI18n();
 

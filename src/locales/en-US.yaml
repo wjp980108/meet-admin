@@ -136,6 +136,10 @@ theme:
   reset: ' has been reset to'
 systemSettings:
   title: System settings
+  tabs:
+    appearance: Appearance
+    layout: Layout
+    general: General
   layout:
     title: Layout style
     default: Default
@@ -150,6 +154,10 @@ systemSettings:
   pageConfig:
     title: Page configuration
     locale: Locale
+    layout: Layout template
+    layoutOptions:
+      aside: Sidebar
+      top: Top bar
     pageSwitching: Page switching effect
     effect:
       fade: Fade in and out

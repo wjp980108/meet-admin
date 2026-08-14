@@ -1,5 +1,6 @@
 import type { BasicColorSchema } from '@vueuse/core';
 import type { LocaleType } from '@/constants/locale.ts';
+import type { LayoutTemplate } from '@/layouts/template';
 import defaultSettingsJson from './defaultSettings.json';
 
 export interface ThemeColor {
@@ -29,8 +30,8 @@ export const predefineColors = [
 
 export type TransitionAnimation = 'none' | 'fade' | 'fade-slide' | 'fade-bottom' | 'fade-scale' | 'zoom-fade' | 'zoom-out';
 export type TabStyle = 'dynamic' | 'card' | 'simple';
-
 export interface AppConfig {
+  layout: LayoutTemplate;
   // 语言
   locale: LocaleType;
   // 侧边栏是否折叠

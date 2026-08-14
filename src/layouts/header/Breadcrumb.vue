@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import { useAppStore } from '@/stores/app';
 import { useRouteStore } from '@/stores/route';
 
-defineOptions({ name: 'Breadcrumb' });
+defineOptions({ name: 'LayoutBreadcrumb' });
 
 const routeStore = useRouteStore();
 const appStore = useAppStore();

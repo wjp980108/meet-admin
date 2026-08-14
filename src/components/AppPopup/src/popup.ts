@@ -58,7 +58,7 @@ export interface PopupItem {
 let uid = 0;
 
 // 当前存活的弹窗实例队列,由 AppPopupHost 渲染
-export const popupItems = reactive<PopupItem[]>([]);
+export const popupItems = shallowReactive<PopupItem[]>([]);
 
 export function openPopup(options: OpenPopupOptions) {
   const { content, onOk, onClosed, ...props } = options;

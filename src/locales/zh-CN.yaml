@@ -136,6 +136,10 @@ theme:
   reset: 颜色已重置为
 systemSettings:
   title: 系统设置
+  tabs:
+    appearance: 外观
+    layout: 布局
+    general: 通用
   layout:
     title: 布局样式
     default: 默认
@@ -150,6 +154,10 @@ systemSettings:
   pageConfig:
     title: 页面配置
     locale: 语言
+    layout: 布局模板
+    layoutOptions:
+      aside: 侧边菜单
+      top: 顶部菜单
     pageSwitching: 页面切换效果
     effect:
       fade: 淡入淡出

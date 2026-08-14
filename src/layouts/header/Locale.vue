@@ -2,7 +2,7 @@
 import { localeList } from '@/constants/locale';
 import { useAppStore } from '@/stores/app';
 
-defineOptions({ name: 'Locale' });
+defineOptions({ name: 'LayoutLocale' });
 
 const appStore = useAppStore();
 

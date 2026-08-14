@@ -21,6 +21,9 @@ export const useAppStore = defineStore('app-store', () => {
   // 明暗模式
   const { store: colorMode, system } = useColorMode({ initialValue: defaultSettings.colorMode });
 
+  // 系统设置抽屉在布局模板切换时也需保持打开状态
+  const settingPanelShow = ref(false);
+
   // 解析后的实际配色（auto 跟随系统）
   const colorScheme = computed(() => {
     return colorMode.value === 'auto' ? system.value : colorMode.value;
@@ -129,6 +132,7 @@ export const useAppStore = defineStore('app-store', () => {
   return {
     ...toRefs(state.value),
     colorMode,
+    settingPanelShow,
     colorScheme,
     isDark,
     setColorMode,
@@ -143,6 +147,7 @@ export const useAppStore = defineStore('app-store', () => {
     // 只持久化真正的用户设置；collapse / loadFlag 是瞬态状态，持久化会导致刷新后布局错乱甚至白屏
     pick: [
       'locale',
+      'layout',
       'transitionAnimation',
       'themeColor',
       'size',

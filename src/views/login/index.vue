@@ -6,8 +6,8 @@ import logo from '@/assets/images/logo.png';
 import sign from '@/assets/images/sign.svg';
 import { renderIcon } from '@/components';
 import { Constant } from '@/enums/common';
-import Locale from '@/layouts/components/LayHeader/components/Locale.vue';
-import ThemeSwitch from '@/layouts/components/LayHeader/components/ThemeSwitch.vue';
+import Locale from '@/layouts/header/Locale.vue';
+import ThemeSwitch from '@/layouts/header/ThemeSwitch.vue';
 import { useUserStore } from '@/stores/user';
 import { storage } from '@/utils/storage';
 

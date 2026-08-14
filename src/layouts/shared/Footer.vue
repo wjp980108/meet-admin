@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 
-defineOptions({ name: 'LayFooter' });
+defineOptions({ name: 'LayoutFooter' });
 
 const appName = import.meta.env.VITE_APP_NAME;
 </script>
