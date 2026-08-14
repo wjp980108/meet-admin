@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
-import createVitePlugins from './build/plugins';
+import createVitePlugins from './build/plugins.ts';
 
 export default defineConfig(({ mode }) => {
   // eslint-disable-next-line node/prefer-global/process

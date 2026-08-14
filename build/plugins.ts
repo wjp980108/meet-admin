@@ -68,7 +68,7 @@ function versionFilePlugin(): Plugin {
     // 仅在 build 时生效，dev 不需要
     apply: 'build',
     generateBundle() {
-      const { version } = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf-8'));
+      const { version } = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), 'utf-8'));
 
       this.emitFile({
         type: 'asset',
@@ -122,7 +122,7 @@ export default function createVitePlugins(env: any) {
       deep: false,
     }),
     VueI18nPlugin({
-      include: path.resolve(__dirname, '../src/locales/**'),
+      include: path.resolve(import.meta.dirname, '../src/locales/**'),
     }),
     configCompressPlugin(env.VITE_COMPRESSION),
     versionFilePlugin(),
