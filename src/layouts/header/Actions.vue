@@ -4,14 +4,13 @@ import Locale from '@/layouts/header/Locale.vue';
 import Notification from '@/layouts/header/Notification.vue';
 import ThemeSwitch from '@/layouts/header/ThemeSwitch.vue';
 import SearchMenu from '@/layouts/menu/MenuSearch.vue';
-import Settings from '@/layouts/settings/index.vue';
 import { useAppStore } from '@/stores/app';
 
 defineOptions({ name: 'LayoutHeaderActions' });
 defineProps<{ compact: boolean }>();
 
 const appStore = useAppStore();
-const { fullscreen } = storeToRefs(appStore);
+const { fullscreen, settingPanelShow } = storeToRefs(appStore);
 const showSearchMenu = ref(false);
 </script>
 
@@ -28,7 +27,9 @@ const showSearchMenu = ref(false);
       <Notification />
       <ThemeSwitch />
       <Locale />
-      <Settings />
+      <div class="wrapper" @click="settingPanelShow = true">
+        <app-icon icon="icon-park-outline:setting" />
+      </div>
     </template>
     <Avatar />
     <!-- 搜索菜单 -->

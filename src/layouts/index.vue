@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
+import Settings from '@/layouts/settings/index.vue';
 import { layoutTemplates } from '@/layouts/template';
 import { initRouter } from '@/router/utils.ts';
 import { useAppStore } from '@/stores/app';
@@ -33,5 +34,7 @@ const watermarkFont = computed(() => ({
 <template>
   <el-watermark class="wh-full" :content="watermarkContent" :font="watermarkFont" :z-index="9999">
     <component :is="layoutTemplates[layout].component" />
+    <!-- 系统设置 -->
+    <Settings />
   </el-watermark>
 </template>
