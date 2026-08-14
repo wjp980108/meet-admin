@@ -1,5 +1,31 @@
 ## Changelog
 
+### 0.6.0
+
+_2026-08-15_
+
+#### New features
+
+- Added a top-menu layout that can be selected alongside the sidebar layout in system settings
+- Menus now support embedding external pages in an iframe or opening them as external links
+- Expanded the external-page demo menus
+- Added general AI collaboration guidance
+
+#### Bug fixes
+
+- Fixed residual warnings from the latest Vite version
+- Improved layout switching in system settings
+- Updated the [ AppPopup ] container to use a shallow reactive proxy, avoiding deep-proxy overhead
+
+#### Refactors
+
+- Refactored the layout module into reusable header, menu, content, tabs, and settings components
+- Improved the refresh-page action so it is available in every layout mode
+
+#### Build
+
+- Upgraded project dependencies and aligned the required Node.js version
+
 ### 0.5.0
 
 _2026-07-16_
