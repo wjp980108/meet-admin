@@ -17,6 +17,7 @@ const tabStore = useTabStore();
 const appStore = useAppStore();
 
 const { tabs, currentTabPath } = storeToRefs(tabStore);
+const { loadFlag } = storeToRefs(appStore);
 const { initTab, addTab } = tabStore;
 
 onMounted(() => {
@@ -156,6 +157,11 @@ const tabClass = computed(() => `${appStore.tabStyle}-tab`);
         </el-tab-pane>
       </el-tabs>
     </div>
+    <div class="tabs-actions">
+      <div class="wrapper" @click="appStore.reloadPage()">
+        <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
+      </div>
+    </div>
     <el-dropdown
       ref="contextmenuRef" trigger="contextmenu" placement="bottom-start" virtual-triggering
       :virtual-ref="virtualRef" @command="handleSelect"
@@ -180,6 +186,10 @@ const tabClass = computed(() => `${appStore.tabStyle}-tab`);
 @use 'tabs-simple';
 
 .tabs-box {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--el-border-color-light);
+
   // 虚拟触发时 el-dropdown 仅作为弹层容器，其触发元素无需显示；
   // 否则空的 .el-dropdown（默认 inline-flex）会在页面上占据一块空白
   :deep(.el-dropdown) {
@@ -187,16 +197,23 @@ const tabClass = computed(() => `${appStore.tabStyle}-tab`);
   }
 
   .tabs-menu {
+    flex: 1;
+    min-width: 0;
+    border-right: 1px solid var(--el-border-color);
+
     :deep(.el-tabs) {
       .el-tabs__header {
         margin: 0;
+        border: 0;
 
         .el-tabs__nav-wrap {
+          margin: 0;
+
           .el-tabs__nav {
             border: none;
 
             .el-tabs__item {
-              color: var(--el-text-color-primary);
+              margin: 0;
               padding-left: 0;
               padding-right: 0;
 
@@ -238,6 +255,10 @@ const tabClass = computed(() => `${appStore.tabStyle}-tab`);
         }
       }
     }
+  }
+
+  .tabs-actions {
+    padding: 0 var(--spacing-sm);
   }
 }
 </style>

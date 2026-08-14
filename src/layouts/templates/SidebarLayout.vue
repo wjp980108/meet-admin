@@ -10,7 +10,7 @@ import { useAppStore } from '@/stores/app';
 defineOptions({ name: 'SidebarLayout' });
 
 const appStore = useAppStore();
-const { loadFlag, breadcrumbShow, collapse } = storeToRefs(appStore);
+const { breadcrumbShow, collapse } = storeToRefs(appStore);
 
 const router = useRouter();
 const name = import.meta.env.VITE_APP_NAME;
@@ -50,12 +50,7 @@ watchEffect(() => {
     <el-container direction="vertical">
       <el-header>
         <app-flex ref="headerRef" class="p-[8px_12px] border-b" justify="space-between" align="center">
-          <app-flex class="overflow-hidden" :size="8" align="center">
-            <div class="wrapper" @click="appStore.reloadPage()">
-              <app-icon :class="loadFlag ? '' : 'is-loading'" icon="icon-park-outline:refresh" />
-            </div>
-            <Breadcrumb v-if="isShowBreadcrumb && breadcrumbShow" />
-          </app-flex>
+          <Breadcrumb v-if="isShowBreadcrumb && breadcrumbShow" />
           <HeaderActions :compact="isCompact" />
         </app-flex>
         <!-- 页签 -->
